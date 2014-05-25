@@ -23,26 +23,62 @@ TARGET_CPU_VARIANT := krait
 
 TARGET_NO_BOOTLOADER := true
 
+TARGET_PREBUILT_KERNEL := device/moto/condor/kernel
+#TARGET_KERNEL_SOURCE := kernel/lge/msm8974
+#TARGET_KERNEL_CONFIG := msm8610_defconfig
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 vmalloc=400M maxcpus=4 lpj=192411 msm_watchdog_v2.enable=1
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags vmalloc=400M
 
-BOARD_USES_ALSA_AUDIO := true
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/moto/condor/dt.img
 
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno302
 TARGET_NO_RADIOIMAGE := true
-TARGET_BOARD_PLATFORM := msm8974
-TARGET_BOOTLOADER_BOARD_NAME := hammerhead
-TARGET_BOARD_INFO_FILE := device/lge/hammerhead/board-info.txt
+TARGET_BOARD_PLATFORM := msm8610
+TARGET_BOOTLOADER_BOARD_NAME := condor
+TARGET_BOARD_INFO_FILE := device/moto/condor/board-info.txt
 
-BOARD_EGL_CFG := device/lge/hammerhead/egl.cfg
+#TARGET_QCOM_DISPLAY_VARIANT := caf-new
+#TARGET_USES_QCOM_BSP := true
+
+BOARD_USES_QCOM_HARDWARE := true
+
+COMMON_GLOBAL_CFLAGS += -DMOTOROLA_UIDS -DQCOM_HARDWARE
+TARGET_USES_MOTOROLA_LOG := true
+TARGET_NR_SVC_SUPP_GIDS := 32
+
+BOARD_EGL_CFG := device/moto/condor/egl.cfg
 
 USE_OPENGL_RENDERER := true
 
+# Wifi related defines
+# Thank you to contributors of github.com/CyanogenMod/android_device_motorola_qcom-common
+BOARD_HAS_QCOM_WLAN := true
+BOARD_HAS_QCOM_WLAN_SDK := true
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME := "wlan"
+BOARD_WLAN_DEVICE := qcwcn
+
+WLAN_MODULES:
+	mkdir -p $(KERNEL_MODULES_OUT)/pronto
+	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
+	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+
+TARGET_KERNEL_MODULES += WLAN_MODULES
+
+TARGET_QCOM_AUDIO_VARIANT := caf
+BOARD_USES_ALSA_AUDIO := true
+
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672
+TARGET_USERIMAGES_USE_F2FS := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 10526720
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10526720
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 29267830784
 BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200
@@ -51,12 +87,15 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
-TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TARGET_RECOVERY_UI_LIB := librecovery_ui_hammerhead
-TARGET_RECOVERY_FSTAB = device/lge/hammerhead/fstab.hammerhead
+BOARD_USES_QC_TIME_SERVICES := true
 
-TARGET_RELEASETOOLS_EXTENSIONS := device/lge/hammerhead
+#TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+#TARGET_RECOVERY_UI_LIB := librecovery_ui_condor
+TARGET_RECOVERY_FSTAB = device/moto/condor/rootdir/fstab.qcom
+BOARD_HAS_NO_SELECT_BUTTON := true
 
-BOARD_LIB_DUMPSTATE := libdumpstate.hammerhead
+#TARGET_RELEASETOOLS_EXTENSIONS := device/moto/condor
 
--include vendor/lge/hammerhead/BoardConfigVendor.mk
+#BOARD_LIB_DUMPSTATE := libdumpstate.condor
+
+-include vendor/moto/condor/BoardConfigVendor.mk

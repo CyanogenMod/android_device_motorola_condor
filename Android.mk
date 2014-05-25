@@ -23,9 +23,47 @@
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
 
-ifneq ($(filter hammerhead, $(TARGET_DEVICE)),)
+ifneq ($(filter condor, $(TARGET_DEVICE)),)
 
 LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := wlan_persist_symlink
+LOCAL_MODULE_CLASS := FAKE
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): WLAN_PERSIST_FILE := /persist/WCNSS_qcom_wlan_factory_nv.bin
+$(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT_ETC)/firmware/wlan/prima/WCNSS_qcom_wlan_factory_nv.bin
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
+$(LOCAL_BUILT_MODULE):
+	$(hide) echo "Symlink: $(SYMLINK) -> $(WLAN_PERSIST_FILE)"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) mkdir -p $(dir $(SYMLINK))
+	$(hide) rm -rf $@
+	$(hide) rm -rf $(SYMLINK)
+	$(hide) ln -sf $(WLAN_PERSIST_FILE) $(SYMLINK)
+	$(hide) touch $@
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := wlan_module_symlink
+LOCAL_MODULE_CLASS := FAKE
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): WLAN_MODULE := /system/lib/modules/pronto/pronto_wlan.ko
+$(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT_SHARED_LIBRARIES)/modules/wlan.ko
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
+$(LOCAL_BUILT_MODULE):
+	$(hide) echo "Symlink: $(SYMLINK) -> $(WLAN_MODULE)"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) mkdir -p $(dir $(SYMLINK))
+	$(hide) rm -rf $@
+	$(hide) rm -rf $(SYMLINK)
+	$(hide) ln -sf $(WLAN_MODULE) $(SYMLINK)
+	$(hide) touch $@
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
