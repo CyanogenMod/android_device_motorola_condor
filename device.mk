@@ -146,7 +146,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     wlan_module_symlink \
-	wlan_persist_symlink
+    wlan_persist_symlink \
+    wcnss_service
 
 PRODUCT_PACKAGES += \
     libion
