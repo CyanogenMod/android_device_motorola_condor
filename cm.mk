@@ -22,6 +22,3 @@ PRODUCT_MODEL := Moto E
 PRODUCT_MANUFACTURER := Motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=condor_retaildsds BUILD_FINGERPRINT=motorola/condor_retaildsds/condor_umtsds:4.4.2/KXC20.82-14/13:user/release-keys PRIVATE_BUILD_DESC="condor_retaildsds-user 4.4.2 KXC20.82-14 13 release-keys"
-
-# Enable Torch
-PRODUCT_PACKAGES += Torch
