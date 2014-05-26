@@ -114,7 +114,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-PRODUCT_CHARACTERISTICS := nosdcard
+PRODUCT_CHARACTERISTICS := default
 
 DEVICE_PACKAGE_OVERLAYS := \
     device/moto/condor/overlay
@@ -131,7 +131,8 @@ PRODUCT_PACKAGES += \
     gralloc.msm8610 \
     libgenlock \
     lights.msm8610 \
-    hwcomposer.msm8610
+    hwcomposer.msm8610 \
+    memtrack.msm8610
 
 PRODUCT_PACKAGES += \
     audio.msm8610 \
