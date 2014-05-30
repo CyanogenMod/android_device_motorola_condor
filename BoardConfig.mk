@@ -23,15 +23,17 @@ TARGET_CPU_VARIANT := krait
 
 TARGET_NO_BOOTLOADER := true
 
-TARGET_PREBUILT_KERNEL := device/moto/condor/kernel
-#TARGET_KERNEL_SOURCE := kernel/moto/condor
-#TARGET_KERNEL_CONFIG := msm8610_defconfig
+#TARGET_PREBUILT_KERNEL := device/moto/condor/kernel
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_CUSTOM_BOOTIMG_MK := device/moto/condor/mkbootimg.mk
+TARGET_KERNEL_SOURCE := kernel/moto/condor
+TARGET_KERNEL_CONFIG := msm8610_defconfig
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags vmalloc=400M
 
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/moto/condor/dt.img
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno302
 TARGET_NO_RADIOIMAGE := true

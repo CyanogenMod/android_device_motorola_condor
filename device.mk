@@ -19,14 +19,7 @@
 #
 # Everything in this directory will become public
 
-
-LOCAL_KERNEL := device/moto/condor/kernel
-
-PRODUCT_COPY_FILES := \
-    $(LOCAL_KERNEL):kernel
-
 PRODUCT_COPY_FILES += \
-    device/moto/condor/rootdir/module_hashes:root/module_hashes \
     device/moto/condor/rootdir/fstab.qcom:root/fstab.qcom \
     device/moto/condor/rootdir/init.mmi.boot.sh:root/init.mmi.boot.sh \
     device/moto/condor/rootdir/init.mmi.rc:root/init.mmi.rc \
@@ -68,22 +61,6 @@ PRODUCT_COPY_FILES += \
     device/moto/condor/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
-    device/moto/condor/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
-    device/moto/condor/modules/dma_test.ko:system/lib/modules/dma_test.ko \
-    device/moto/condor/modules/gpio_axis.ko:system/lib/modules/gpio_axis.ko \
-    device/moto/condor/modules/gpio_event.ko:system/lib/modules/gpio_event.ko \
-    device/moto/condor/modules/gpio_input.ko:system/lib/modules/gpio_input.ko \
-    device/moto/condor/modules/gpio_matrix.ko:system/lib/modules/gpio_matrix.ko \
-    device/moto/condor/modules/gpio_output.ko:system/lib/modules/gpio_output.ko \
-    device/moto/condor/modules/msm-buspm-dev.ko:system/lib/modules/msm-buspm-dev.ko \
-    device/moto/condor/modules/oprofile.ko:system/lib/modules/oprofile.ko \
-    device/moto/condor/modules/qcedev.ko:system/lib/modules/qcedev.ko \
-    device/moto/condor/modules/qcrypto.ko:system/lib/modules/qcrypto.ko \
-    device/moto/condor/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
-    device/moto/condor/modules/rdbg.ko:system/lib/modules/rdbg.ko \
-    device/moto/condor/modules/reset_modem.ko:system/lib/modules/reset_modem.ko \
-    device/moto/condor/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-    device/moto/condor/modules/test-iosched.ko:system/lib/modules/test-iosched.ko \
     device/moto/condor/modules/pronto/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko
 
 # These are the hardware-specific features
