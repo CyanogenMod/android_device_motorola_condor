@@ -22,6 +22,10 @@
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
     $(LOCAL_PATH)/rootdir/init.mmi.boot.sh:root/init.mmi.boot.sh \
+    $(LOCAL_PATH)/rootdir/init.class_main.sh:root/init.class_main.sh \
+    $(LOCAL_PATH)/rootdir/init.mdm.sh:root/init.mdm.sh \
+    $(LOCAL_PATH)/rootdir/init.mmi.radio.sh.sh:root/init.mmi.radio.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.ril.sh.sh:root/init.qcom.ril.sh \
     $(LOCAL_PATH)/rootdir/init.mmi.rc:root/init.mmi.rc \
     $(LOCAL_PATH)/rootdir/init.mmi.touch.sh:root/init.mmi.touch.sh \
     $(LOCAL_PATH)/rootdir/init.mmi.usb.rc:root/init.mmi.usb.rc \

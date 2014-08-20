@@ -124,4 +124,3 @@ memtotal_kb="${memtotal_with_kb_suffix/kB/}"
 if [ "$memtotal_kb" -le 524288 ]; then
    setprop ro.config.low_ram true
 fi
-
