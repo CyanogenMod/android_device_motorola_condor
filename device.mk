@@ -20,48 +20,53 @@
 # Everything in this directory will become public
 
 PRODUCT_COPY_FILES += \
-    device/moto/condor/rootdir/fstab.qcom:root/fstab.qcom \
-    device/moto/condor/rootdir/init.mmi.boot.sh:root/init.mmi.boot.sh \
-    device/moto/condor/rootdir/init.mmi.rc:root/init.mmi.rc \
-    device/moto/condor/rootdir/init.mmi.touch.sh:root/init.mmi.touch.sh \
-    device/moto/condor/rootdir/init.mmi.usb.rc:root/init.mmi.usb.rc \
-    device/moto/condor/rootdir/init.mmi.usb.sh:root/init.mmi.usb.sh \
-    device/moto/condor/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-    device/moto/condor/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
-    device/moto/condor/rootdir/init.qcom.rc:root/init.qcom.rc \
-    device/moto/condor/rootdir/init.qcom.sh:root/init.qcom.sh \
-    device/moto/condor/rootdir/init.qcom.ssr.sh:root/init.qcom.ssr.sh \
-    device/moto/condor/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
-    device/moto/condor/rootdir/init.target.rc:root/init.target.rc \
-    device/moto/condor/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    device/moto/condor/rootdir/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
-    device/moto/condor/rootdir/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    device/moto/condor/rootdir/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    device/moto/condor/rootdir/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
-    device/moto/condor/rootdir/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/moto/condor/rootdir/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
+    $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
+    $(LOCAL_PATH)/rootdir/init.mmi.boot.sh:root/init.mmi.boot.sh \
+    $(LOCAL_PATH)/rootdir/init.mmi.rc:root/init.mmi.rc \
+    $(LOCAL_PATH)/rootdir/init.mmi.touch.sh:root/init.mmi.touch.sh \
+    $(LOCAL_PATH)/rootdir/init.mmi.usb.rc:root/init.mmi.usb.rc \
+    $(LOCAL_PATH)/rootdir/init.mmi.usb.sh:root/init.mmi.usb.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.rc:root/init.qcom.rc \
+    $(LOCAL_PATH)/rootdir/init.qcom.sh:root/init.qcom.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.ssr.sh:root/init.qcom.ssr.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
+    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+    $(LOCAL_PATH)/rootdir/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
-    device/moto/condor/touch_dev.idc:system/usr/idc/touch_dev.idc
+    $(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
 
 PRODUCT_COPY_FILES += \
-    device/moto/condor/audio_policy.conf:system/etc/audio_policy.conf \
-    device/moto/condor/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml
 
 PRODUCT_COPY_FILES += \
-    device/moto/condor/media_codecs.xml:system/etc/media_codecs.xml \
-    device/moto/condor/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_COPY_FILES += \
-    device/moto/condor/sec_config:system/etc/sec_config \
-    device/moto/condor/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf \
-    device/moto/condor/xtwifi.conf:system/etc/xtwifi.conf \
-    device/moto/condor/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
-    device/moto/condor/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+    $(LOCAL_PATH)/rootdir/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/rootdir/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/rootdir/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
 
 PRODUCT_COPY_FILES += \
-    device/moto/condor/modules/pronto/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko
+    $(LOCAL_PATH)/sec_config:system/etc/sec_config \
+    $(LOCAL_PATH)/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf \
+    $(LOCAL_PATH)/xtwifi.conf:system/etc/xtwifi.conf \
+    $(LOCAL_PATH)/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+    $(LOCAL_PATH)/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/modules/pronto/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
