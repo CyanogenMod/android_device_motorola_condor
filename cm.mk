@@ -14,6 +14,9 @@ $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 # Inherit device configuration
 $(call inherit-product, device/moto/condor/device.mk)
 
+#Call vendor blobs
+$(call inherit-product-if-exists, vendor/moto/condor/condor-vendor.mk)
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := condor
 PRODUCT_NAME := cm_condor
