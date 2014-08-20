@@ -291,8 +291,7 @@ service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
 
 service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     class main
-    user radio
-    group radio
+    user root
     oneshot
 
 service ril-qmi /system/bin/sh /init.qcom.ril.sh
