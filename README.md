@@ -1,5 +1,5 @@
-Motorola E
-==========
+Unified Device Tree For Motorola E
+==================================
 
 The Motorola (codenamed _"Condor"_) is a low-range smartphone from Motorola mobility.
 

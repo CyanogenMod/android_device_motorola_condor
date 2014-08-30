@@ -19,6 +19,7 @@
 #
 # Everything in this directory will become public
 
+LOCAL_PATH := device/moto/condor
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
@@ -87,8 +88,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
-    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
@@ -122,20 +121,26 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gralloc.msm8610 \
     libgenlock \
-    lights.msm8610 \
+    copybit.8610 \
     hwcomposer.msm8610 \
-    memtrack.msm8610
+    memtrack.msm8610 \
+    liboverlay
 
 PRODUCT_PACKAGES += \
     audio.msm8610 \
     audio_policy.msm8610
+
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.msm8610
 
 PRODUCT_PACKAGES += \
     audio.primary.msm8610 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler
+    libaudio-resampler \
+    tinymix
 
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -152,6 +157,14 @@ PRODUCT_PACKAGES += \
     libOmxEvrcEnc \
     libOmxQcelp13Enc
 
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
+
+# QRNG
+PRODUCT_PACKAGES += \
+    qrngd \
+    qrngp
+
 PRODUCT_PACKAGES += \
     wlan_module_symlink \
     wlan_persist_symlink \
@@ -163,6 +176,34 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
+
+# Ebtables
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes \
+    libebtc
+
+# FM
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
+    qcom.fmradio
+
+# Lights
+PRODUCT_PACKAGES += \
+    lights.msm8610
+
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8610
+
+# CRDA
+PRODUCT_PACKAGES += \
+    crda \
+    linville.key.pub.pem \
+    regdbdump \
+    regulatory.bin
 
 # Filesystem management tools
 #PRODUCT_PACKAGES += \
@@ -233,8 +274,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-qmi-1.so
-
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
+
+$(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)

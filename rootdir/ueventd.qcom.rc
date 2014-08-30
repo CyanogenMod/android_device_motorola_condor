@@ -206,7 +206,6 @@
 /dev/i2c-5                0660   root       system
 
 # SECURITY
-/dev/qseecom              0660   system     mot_tpapi
 /dev/sec                  0660   system     mot_tpapi
 
 # AK8963 Magnetometer

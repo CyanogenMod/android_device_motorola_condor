@@ -82,6 +82,11 @@
         <item>0</item>
     </integer-array>
 
+    <string-array name="config_locationProviderPackageNames">
+        <item>com.google.android.gms</item>
+        <item>com.android.location.fused</item>
+    </string-array>
+
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">10</integer>
 
@@ -125,7 +130,7 @@
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
-        <item>"usb\\d"</item>
+        <item>"rndis\\d"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -133,14 +138,14 @@
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"wlan0"</item>
-        <item>"softap.*"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
     <string-array translatable="false" name="config_tether_bluetooth_regexs">
-           <item>"bt-pan"</item>
+         <item>"bnep\\d"</item>
+         <item>"bt-pan"</item>
     </string-array>
 
     <!-- Array of allowable ConnectivityManager network types for tethering -->
@@ -205,6 +210,12 @@
     -->
     <bool name="config_enableWifiDisplay">true</bool>
 
+    <!-- The VoiceMail default value is displayed to my own number if it is true -->
+    <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
+
+    <!-- Component name of the geofence services provider. -->
+    <string name="config_geofenceServicesProvider" translatable="false">com.motorola.motgeofencesvc</string>
+
     <integer-array name="config_longPressVibePattern">
         <item>21</item>
     </integer-array>
@@ -235,4 +246,25 @@
         <item>20</item>
     </integer-array>
 
+    <!-- Is the device capable of hot swapping an UICC Card -->
+    <bool name="config_hotswapCapable">true</bool>
+
+    <!-- Default interface to monitor data use -->
+    <string name="config_datause_iface">rmnet0</string>
+
+    <!-- Whether to enable auto provisioning the app for new SIM card on boot.-->
+    <bool name="config_auto_provision_enable">true</bool>
+
+    <!-- Hardware 'face' keys present on the device, stored as a bit field.
+        This integer should equal the sum of the corresponding value for each
+        of the following keys present:
+            1 - Home
+            2 - Back
+            4 - Menu
+            8 - Assistant (search)
+            16 - App switch
+            32 - Camera
+        For example, a device with Home, Back and Menu keys would set this
+        config to 7. -->
+    <integer name="config_deviceHardwareKeys">0</integer>
 </resources>
