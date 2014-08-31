@@ -34,7 +34,7 @@ BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8610
-TARGET_KERNEL_CONFIG := msm8610_defconfig
+TARGET_KERNEL_CONFIG := cm_condor_defconfig
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
@@ -63,7 +63,6 @@ BOARD_USES_QCOM_HARDWARE := true
 
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
-TARGET_FORCE_CPU_UPLOAD := true
 
 COMMON_GLOBAL_CFLAGS += -DMOTOROLA_UIDS -DQCOM_HARDWARE
 TARGET_USES_MOTOROLA_LOG := true
@@ -80,8 +79,7 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 40
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
-# Wifi related defines
-# Thank you to contributors of github.com/CyanogenMod/android_device_motorola_qcom-common
+# Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_HAS_QCOM_WLAN_SDK          := true
 BOARD_WLAN_DEVICE                := qcwcn
@@ -98,6 +96,7 @@ TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_DEEP_BUFFER_PRIMARY := true
 AUDIO_FEATURE_DYNAMIC_VOLUME_MIXER := true
+AUDIO_FEATURE_DISABLED_FM := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \

@@ -255,6 +255,9 @@
     <!-- Whether to enable auto provisioning the app for new SIM card on boot.-->
     <bool name="config_auto_provision_enable">true</bool>
 
+    <!-- We dont have different firmware for wifi modes, prevent reloading it -->
+    <bool name="config_wifiApFirmwareReload">false</bool>
+
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
         This integer should equal the sum of the corresponding value for each
         of the following keys present:

@@ -105,8 +105,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-PRODUCT_CHARACTERISTICS := default
-
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
 
@@ -121,18 +119,25 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gralloc.msm8610 \
     libgenlock \
-    copybit.8610 \
+    copybit.msm8610 \
     hwcomposer.msm8610 \
     memtrack.msm8610 \
+    power.msm8610 \
     liboverlay
+
+# QRNG
+PRODUCT_PACKAGES += qrngp
+
+# Utilities
+PRODUCT_PACKAGES += \
+    charge_only_mode
 
 PRODUCT_PACKAGES += \
     audio.msm8610 \
     audio_policy.msm8610
 
 # Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8610
+PRODUCT_PACKAGES += keystore.msm8610
 
 PRODUCT_PACKAGES += \
     audio.primary.msm8610 \
@@ -141,6 +146,14 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     libaudio-resampler \
     tinymix
+
+# Qcom SoftAP & wifi
+PRODUCT_PACKAGES += \
+    libQWiFiSoftApCfg \
+    libnetcmdiface
+
+# Motorola
+PRODUCT_PACKAGES += aplogd
 
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -157,8 +170,7 @@ PRODUCT_PACKAGES += \
     libOmxEvrcEnc \
     libOmxQcelp13Enc
 
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer
+PRODUCT_BOOT_JARS += qcmediaplayer
 
 # QRNG
 PRODUCT_PACKAGES += \
@@ -170,8 +182,7 @@ PRODUCT_PACKAGES += \
     wlan_persist_symlink \
     wcnss_service
 
-PRODUCT_PACKAGES += \
-    libion
+PRODUCT_PACKAGES += libion
 
 PRODUCT_PACKAGES += \
     librs_jni \
@@ -204,15 +215,6 @@ PRODUCT_PACKAGES += \
     linville.key.pub.pem \
     regdbdump \
     regulatory.bin
-
-# Filesystem management tools
-#PRODUCT_PACKAGES += \
-#    e2fsck
-
-# for off charging mode
-#PRODUCT_PACKAGES += \
-#    charger \
-#    charger_res_images
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
@@ -274,7 +276,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-# setup dalvik vm configs.
-$(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
+# Inhert dalvik heap values from aosp
+$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
