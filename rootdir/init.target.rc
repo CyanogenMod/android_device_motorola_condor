@@ -114,6 +114,16 @@ service wcnss-service /system/bin/wcnss_service
     group system wifi
     oneshot
 
+service qrngp /system/bin/qrngp
+    class main
+    user root
+    group root
+    oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start qrngp
+
 service ppd /system/bin/mm-pp-daemon
     class late_start
     user system

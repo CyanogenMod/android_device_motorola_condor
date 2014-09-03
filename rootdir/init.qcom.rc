@@ -31,6 +31,7 @@ import init.target.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
+    write /sys/block/mmcblk0/queue/scheduler noop
 
 on init
     # Set permissions for persist partition
@@ -357,29 +358,6 @@ on property:bluetooth.hciattach=true
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
-# Service not used
-#service hciattach_ath3k /system/bin/sh /system/etc/init.ath3k.bt.sh
-#     class late_start
-#     user bluetooth
-#     group system bluetooth net_bt_admin misc
-#     disabled
-#     oneshot
-
-# Service not used
-#service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
-#    class late_start
-#    user bluetooth
-#    group bluetooth net_bt_admin inet
-#    disabled
-#    oneshot
-
-#service bt-sap /system/bin/sapd 15
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    class late_start
-#    disabled
-#    oneshot
-
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
     user radio
@@ -409,13 +387,6 @@ service netmgrd /system/bin/netmgrd
     class main
     disabled
 
-# Service not used
-#service sensors /system/bin/sensors.qcom
-#    class late_start
-#    user root
-#    group root
-#    disabled
-
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
     stop netmgrd
@@ -431,25 +402,6 @@ service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     group bluetooth net_bt_admin inet net_admin net_raw
     disabled
     oneshot
-
-# Service not used
-#service amp_init /system/bin/amploader -i
-#    class late_start
-#    user root
-#    disabled
-#    oneshot
-#
-#service amp_load /system/bin/amploader -l 7000
-#    class late_start
-#    user root
-#    disabled
-#    oneshot
-#
-#service amp_unload /system/bin/amploader -u
-#    class late_start
-#    user root
-#    disabled
-#    oneshot
 
 service p2p_supplicant  /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -N \
@@ -496,10 +448,16 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service ptt_socket_app /system/bin/ptt_socket_app
+service ptt_socket_app /system/bin/ptt_socket_app -d
     class main
-    user system
-    group system
+    user root
+    group root
+    oneshot
+
+service ptt_ffbm /system/bin/ptt_socket_app -f -d
+    user root
+    group root
+    disabled
     oneshot
 
 service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
@@ -556,12 +514,6 @@ service xtwifi_client /system/bin/xtwifi-client
     group net_admin wifi inet gps
     disabled
 
-service lowi-server /system/bin/lowi-server
-    class late_start
-    user gps
-    group gps net_admin wifi inet qcom_diag
-    disabled
-
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
     user root
@@ -577,19 +529,6 @@ on property:crypto.driver.load=0
      exec /system/bin/rmmod qcedev.ko
      exec /system/bin/rmmod qce.ko
 
-# Service not used
-#service drmdiag /system/bin/drmdiagapp
-#    class late_start
-#     user root
-#     disabled
-#     oneshot
-#
-#on property:drmdiag.load=1
-#    start drmdiag
-#
-#on property:drmdiag.load=0
-#    stop drmdiag
-
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
     user root
@@ -604,6 +543,7 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
 
 on property:sys.boot_completed=1
     start qcom-post-boot
+    write /sys/block/mmcblk0/queue/scheduler row
 
 service atfwd /system/bin/ATFWD-daemon
     class late_start
@@ -626,23 +566,9 @@ service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 on property:persist.data.ds_fmc_app.mode=1
     start ds_fmc_appd
 
-#service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
-#    class late_start
-#    group net_bt_admin inet radio wifi
-#    disabled
-
-#on property:persist.ims.regmanager.mode=1
-#    start ims_regmanager
-
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
-
-# Service not used
-#service battery_monitor /system/bin/battery_monitor
-#    user system
-#    group system
-#    disabled
 
 service ril-daemon1 /system/bin/rild -c 1
     class main
@@ -659,20 +585,6 @@ service ril-daemon2 /system/bin/rild -c 2
     user root
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
-
-# Service not used
-#service profiler_daemon /system/bin/profiler_daemon
-#    class late_start
-#    user root
-#    group root
-#    disabled
-
-# Service not used
-#service hcidump /system/bin/sh /system/etc/hcidump.sh
-#    user bluetooth
-#    group bluetooth system net_bt_admin net_admin
-#    disabled
-#    oneshot
 
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
@@ -692,13 +604,13 @@ on nonencrypted
 
 #comment this and start  MOTO specific charge_only_mode.
 #(See /device/moto/mot8226/init.target.rc for details).
-#service charger /charger
-#    class charger
+service charger /charger
+   class charger
 
-#service ssr_diag /system/bin/ssr_diag
-#    class late_start
-#    user system
-#    group system
+service ssr_diag /system/bin/ssr_diag
+    class late_start
+    user system
+    group system
 
 # SSR setting
 on property:persist.sys.ssr.restart_level=*

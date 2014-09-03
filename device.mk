@@ -216,6 +216,10 @@ PRODUCT_PACKAGES += \
     regdbdump \
     regulatory.bin
 
+# Charger - moto uses a funky ro.bootmode=mot-charger
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/moto_com.sh:system/bin/moto_com.sh
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
