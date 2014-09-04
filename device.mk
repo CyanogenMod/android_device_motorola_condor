@@ -140,12 +140,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += keystore.msm8610
 
 PRODUCT_PACKAGES += \
+    audiod \
     audio.primary.msm8610 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
     libaudio-resampler \
-    tinymix
+    tinymix \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing
+
+# Charger
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
 
 # Qcom SoftAP & wifi
 PRODUCT_PACKAGES += \
@@ -153,7 +162,9 @@ PRODUCT_PACKAGES += \
     libnetcmdiface
 
 # Motorola
-PRODUCT_PACKAGES += aplogd
+PRODUCT_PACKAGES += \
+    aplogd \
+    charge_only_mode
 
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -162,7 +173,8 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxVdec \
     libOmxVdecHevc \
-    libOmxVenc
+    libOmxVenc \
+    qcmediaplayer
 
 PRODUCT_PACKAGES += \
     libOmxAacEnc \
