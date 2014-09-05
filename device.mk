@@ -228,6 +228,10 @@ PRODUCT_PACKAGES += \
     regdbdump \
     regulatory.bin
 
+# OpenDelta
+PRODUCT_PROPERTY_OVERRIDES += ro.delta.version=VERSION
+PRODUCT_PACKAGES += OpenDelta
+
 # Charger - moto uses a funky ro.bootmode=mot-charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/moto_com.sh:system/bin/moto_com.sh
