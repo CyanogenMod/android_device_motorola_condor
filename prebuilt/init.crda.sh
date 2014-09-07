@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2013, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -8,7 +8,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Linux Foundation nor
+#     * Neither the name of The Linux Foundation nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -26,35 +26,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-carrier=`getprop persist.env.spec`
-if [ "$carrier" = "ChinaTelecom" ]; then
-    # Update the props.
-    setprop persist.env.phone.global true
-    setprop persist.env.plmn.update true
-
-    # Remount /system with read-write permission for copy action.
-    `mount -o remount,rw /system`
-
-    # Copy the modules to system app.
-    `cp /system/vendor/ChinaTelecom/system/app/RoamingSettings.apk /system/app/RoamingSettings.apk`
-    `cp /system/vendor/ChinaTelecom/system/app/UniversalDownload.apk /system/app/UniversalDownload.apk`
-    `chmod -h 644 /system/app/RoamingSettings.apk`
-    `chmod -h 644 /system/app/UniversalDownload.apk`
-
-    # Remount /system with read-only
-    `mount -o remount,ro /system`
-else
-    # Update the props.
-    setprop persist.env.phone.global false
-    setprop persist.env.plmn.update false
-
-    # Remount /system with read-write permission for remove action.
-    `mount -o remount,rw /system`
-
-    # Remove the modules from the system app.
-    `rm /system/app/RoamingSettings.apk`
-    `rm /system/app/UniversalDownload.apk`
-
-    # Remount /system with read-only
-    `mount -o remount,ro /system`
+country=`getprop wlan.crda.country`
+# crda takes input in COUNTRY environment variable
+if [ $country != "" ]
+then
+COUNTRY="$country" /system/bin/crda
 fi
