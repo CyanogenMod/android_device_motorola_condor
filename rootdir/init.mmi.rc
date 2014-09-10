@@ -96,6 +96,9 @@ on post-fs-data
     chmod 0770 /pds/public/atvc
     mkdir /data/local/dbvc 0750 mot_tcmd shell
     mkdir /data/local/atvc 0775 mot_tcmd shell
+    # Wifi
+    restorecon /data/hostapd
+    restorecon /data/misc/wifi/hostapd/wlan0
     # Create moodle directory that MOT_MOODLE can write to
     mkdir /data/local/moodle 0770 graphics mot_tcmd
 
@@ -359,11 +362,6 @@ on property:init.svc.bugreport=stopping
 on property:init.svc.bugreport=stopped
     write /sys/power/wake_unlock bug2go-native
 
-service bugreport /system/bin/bug2go-bugreport
-    class main
-    disabled
-    oneshot
-    keycodes 115 116 # VOLUME_UP + PWR
 
 service kpgather /system/bin/kpgather
     class core
