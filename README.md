@@ -4,7 +4,7 @@ Unified Device Tree For Motorola E
 The Motorola (codenamed _"Condor"_) is a low-range smartphone from Motorola mobility.
 
 Build Status:- ![Build](http://jenkins.hubdroid.com/buildStatus/icon?job=cm-11-motoe "Build")
-Download links:- https://s.basketbuild.com/devs/percy_g2/CM-11-Condor/
+Download links:- http://builds.hubdroid.com/cm11/nightlies/final/condor/
 
 It was announced on May 2014.
 
