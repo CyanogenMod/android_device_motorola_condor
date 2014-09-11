@@ -69,19 +69,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
-    $(LOCAL_PATH)/prebuilt/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/prebuilt/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
-
-PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:system/etc/sec_config \
-    $(LOCAL_PATH)/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf \
-    $(LOCAL_PATH)/xtwifi.conf:system/etc/xtwifi.conf \
-    $(LOCAL_PATH)/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
-    $(LOCAL_PATH)/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/modules/pronto/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko
+    $(LOCAL_PATH)/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -155,8 +144,7 @@ PRODUCT_PACKAGES += \
 
 # Qcom SoftAP & wifi
 PRODUCT_PACKAGES += \
-    libQWiFiSoftApCfg \
-    libnetcmdiface
+    libQWiFiSoftApCfg
 
 # Motorola
 PRODUCT_PACKAGES += \
@@ -230,6 +218,27 @@ PRODUCT_PACKAGES += \
     regdbdump \
     regulatory.bin
 
+# Misc
+PRODUCT_PACKAGES += \
+    curl \
+    libbson \
+    libcurl \
+    tcpdump
+
+# Wifi
+PRODUCT_PACKAGES += \
+    p2p_supplicant_overlay.conf \
+    wpa_supplicant_overlay.conf
+
+# Wifi
+PRODUCT_PACKAGES += \
+    hostapd.accept \
+    hostapd.deny \
+    hostapd_default.conf
+
+PRODUCT_PACKAGES += \
+    WCNSS_qcom_wlan_factory_nv.bin
+
 # OpenDelta
 PRODUCT_PROPERTY_OVERRIDES += ro.delta.version=VERSION
 PRODUCT_PACKAGES += OpenDelta
@@ -298,6 +307,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # set default USB configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
+
+PRODUCT_COPY_FILES += \
+    kernel/motorola/msm8610/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    kernel/motorola/msm8610/drivers/staging/prima/firmware_bin/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
 
 # Inhert dalvik heap values from aosp
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
