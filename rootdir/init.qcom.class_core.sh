@@ -205,7 +205,7 @@ fake_batt_capacity=`getprop persist.bms.fake_batt_capacity`
 case "$fake_batt_capacity" in
     "") ;; #Do nothing here
     * )
-    echo "$fake_batt_capacity" > /sys/class/power_supply/battery/capacity
+    echo "$fake_batt_capacity" > /sys/module/qpnp_bms/parameters/bms_fake_battery
     ;;
 esac
 

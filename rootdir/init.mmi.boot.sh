@@ -113,14 +113,3 @@ then
 		fi
 	fi
 fi
-
-# Set the Android property ro.config.low_ram if the device has less
-# than 512MB RAM available to the OS. This property is used by
-# dalvik to disable certain memory intensive features.
-meminfo_memtotal=`cat /proc/meminfo | /system/bin/grep MemTotal`
-memtotal_with_kb_suffix="${meminfo_memtotal#*: }"
-memtotal_kb="${memtotal_with_kb_suffix/kB/}"
-
-if [ "$memtotal_kb" -le 524288 ]; then
-   setprop ro.config.low_ram true
-fi

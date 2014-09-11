@@ -325,12 +325,6 @@ service aplogd /system/bin/aplogd
     # for kernel logging.
     disabled
 
-service mmi-radio-sh /system/bin/logwrapper /system/bin/sh /init.mmi.radio.sh
-    class core
-    user radio
-    group radio
-    oneshot
-
 on property:persist.sys.diag_mdlog.on=1
     start diag_mdlog
 
@@ -389,10 +383,6 @@ service mmi-touch-sh /system/bin/logwrapper /system/bin/sh /init.mmi.touch.sh sy
     class late_start
     user root
     oneshot
-
-on property:ro.secure=0
-    # disable dmesg restrict for insecure builds
-    write /proc/sys/kernel/dmesg_restrict 0
 
 on property:ro.debuggable=1
     # disable dmesg restrict in eng/userdebug build
