@@ -236,6 +236,9 @@ PRODUCT_PACKAGES += \
     hostapd.deny \
     hostapd_default.conf
 
+PRODUCT_PACKAGES += \
+    WCNSS_qcom_wlan_factory_nv.bin
+
 # OpenDelta
 PRODUCT_PROPERTY_OVERRIDES += ro.delta.version=VERSION
 PRODUCT_PACKAGES += OpenDelta
