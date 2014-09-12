@@ -248,10 +248,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/moto_com.sh:system/bin/moto_com.sh
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
-
-PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
+
+# Recovery
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.forbid_format=/fsg,/firmware,/persist,/boot
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true

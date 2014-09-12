@@ -1,6 +1,3 @@
-## Specify phone tech before including full_phone
-$(call inherit-product, vendor/cm/config/gsm.mk)
-
 # Boot animation
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
@@ -22,6 +19,7 @@ PRODUCT_DEVICE := condor
 PRODUCT_NAME := cm_condor
 PRODUCT_BRAND := motorola
 PRODUCT_MODEL := Moto E
+PRODUCT_RELEASE_NAME := MOTO E
 PRODUCT_MANUFACTURER := Motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

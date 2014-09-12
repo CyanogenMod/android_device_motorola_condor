@@ -40,13 +40,13 @@ on init
 
 on fs
     # Mount PDS
-    wait /dev/block/platform/msm_sdcc.1/by-name/pds
-    exec /system/bin/mountpds -d /dev/block/platform/msm_sdcc.1/by-name/pds -m rw
-    restorecon /pds /pds/public/atvc
+    #wait /dev/block/platform/msm_sdcc.1/by-name/pds
+    #exec /system/bin/mountpds -d /dev/block/platform/msm_sdcc.1/by-name/pds -m rw
+    #restorecon /pds /pds/public/atvc
 
     # Mount modem FSG partition
     wait /dev/block/platform/msm_sdcc.1/by-name/fsg
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/fsg /fsg ro nosuid nodev barrier=0 defcontext=u:object_r:modem_file:s0
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/fsg /fsg ro nosuid nodev barrier=0
 
     #Backup ramconsole on abnormal reboot.
     copy /proc/last_kmsg /data/dontpanic/last_kmsg
@@ -379,7 +379,7 @@ service mmi-boot-sh /system/bin/sh /init.mmi.boot.sh
     user root
     oneshot
 
-service mmi-touch-sh /system/bin/logwrapper /system/bin/sh /init.mmi.touch.sh synaptics
+service mmi-touch-sh /system/bin/sh /init.mmi.touch.sh synaptics
     class late_start
     user root
     oneshot
@@ -424,11 +424,6 @@ service atvc /system/bin/dbvc_atvc_property_set
    user mot_atvc
    group mot_tpapi
    oneshot
-
-service qe /xbin/qe /system
-   class main
-   oneshot
-   disabled
 
 service ss_rdump /system/bin/subsystem_ramdump 1 0
    class late_start

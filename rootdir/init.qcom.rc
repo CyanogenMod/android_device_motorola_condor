@@ -27,7 +27,7 @@
 
 # use init.mmi.usb.rc
 #import init.qcom.usb.rc
-import init.target.rc
+#import init.target.rc
 
 on early-init
     write /sys/block/mmcblk0/queue/scheduler noop
@@ -92,6 +92,9 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
+
+     # Prevents permission denied error for telephony
+    chmod 0644 /proc/cmdline
 
     setprop wifi.interface wlan0
 
@@ -163,6 +166,11 @@ on boot
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
 
+    setprop ro.hw.device ${ro.boot.device}
+    setprop ro.hw.hwrev ${ro.boot.hwrev}
+    setprop ro.hw.radio ${ro.boot.radio}
+
+
 # msm specific files that need to be created on /data
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
@@ -177,13 +185,6 @@ on post-fs-data
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
-
-    mkdir /data/connectivity/nsrm 0771 system system
-    chown system system /data/connectivity/nsrm
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
