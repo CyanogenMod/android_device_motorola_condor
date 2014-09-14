@@ -21,7 +21,7 @@ Battery | 1980 mAh
 Display | 4.91 x 2.55 x 0.48 in
 Camera  | 5 MP, 2592 х 1944 pixels
 
-![Motorola E](http://3.bp.blogspot.com/-Dn2Rid5a-bs/U1fD6aOx_pI/AAAAAAAAAfM/B-xm4G7uX88/s1600/motorola-moto-e.jpg "Motorola E")
+![Motorola E](https://camo.githubusercontent.com/65db99a8598e2e96a3b1e88f76020559ac23618c/687474703a2f2f63646e322e67736d6172656e612e636f6d2f76762f6269677069632f6d6f746f726f6c612d6d6f746f2d652e6a7067 "Motorola E")
 
 This branch is for building CyanogenMod 11.0 (or Android KitKat 4.4 AOSP based roms) Firmware's.
 

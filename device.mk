@@ -19,10 +19,9 @@
 #
 # Everything in this directory will become public
 
-LOCAL_PATH := device/moto/condor
+LOCAL_PATH := device/motorola/condor
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
@@ -40,6 +39,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
     $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
     $(LOCAL_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    $(LOCAL_PATH)/rootdir/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    $(LOCAL_PATH)/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc
 
 # Prebuilt
 PRODUCT_COPY_FILES += \
@@ -103,6 +104,10 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 960
+TARGET_SCREEN_WIDTH := 540
+
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -156,6 +161,7 @@ PRODUCT_PACKAGES += \
     charger \
     charger_res_images
 
+# Omx
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libstagefrighthw \
@@ -239,10 +245,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
 
-# OpenDelta
-PRODUCT_PROPERTY_OVERRIDES += ro.delta.version=VERSION
-PRODUCT_PACKAGES += OpenDelta
-
 # Charger - moto uses a funky ro.bootmode=mot-charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/moto_com.sh:system/bin/moto_com.sh
@@ -308,6 +310,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
+# Prima(pronto firmware)
 PRODUCT_COPY_FILES += \
     kernel/motorola/msm8610/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     kernel/motorola/msm8610/drivers/staging/prima/firmware_bin/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini

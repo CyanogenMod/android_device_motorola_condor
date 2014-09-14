@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VENDOR=moto
+VENDOR=motorola
 DEVICE=condor
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary

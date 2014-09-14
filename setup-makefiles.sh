@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VENDOR=moto
+VENDOR=motorola
 DEVICE=condor
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
@@ -24,7 +24,7 @@ MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 
 #Prebuilt libraries that are needed to build open-source libraries
 PRODUCT_COPY_FILES := \
-    vendor/moto/condor/proprietary/vendor/lib/libtime_genoff.so:obj/lib/libtime_genoff.so
+    vendor/motorola/condor/proprietary/vendor/lib/libtime_genoff.so:obj/lib/libtime_genoff.so
 
 PRODUCT_COPY_FILES += \\
 EOF

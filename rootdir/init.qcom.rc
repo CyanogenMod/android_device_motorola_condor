@@ -25,8 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-# use init.mmi.usb.rc
-#import init.qcom.usb.rc
+import init.qcom.usb.rc
 #import init.target.rc
 
 on early-init
