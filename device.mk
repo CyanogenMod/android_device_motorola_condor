@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@
 #
 # Everything in this directory will become public
 
-LOCAL_PATH := device/motorola/condor
+LOCAL_PATH := device/moto/condor
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
@@ -238,6 +239,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
 
+# OpenDelta
+PRODUCT_PROPERTY_OVERRIDES += ro.delta.version=VERSION
+PRODUCT_PACKAGES += OpenDelta
+
 # Charger - moto uses a funky ro.bootmode=mot-charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/moto_com.sh:system/bin/moto_com.sh
@@ -299,26 +304,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.loc.nlp_name=com.qualcomm.services.location \
     ro.gps.agps_provider=1
 
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.24bit.enable=false \
-    audio.offload.buffer.size.kb=32 \
-    audio.offload.gapless.enabled=false \
-    audio.offload.multiple.enabled=false \
-    audio.offload.pcm.enable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    av.offload.enable=false \
-    av.streaming.offload.enable=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    mm.enable.smoothstreaming=true
-
 # set default USB configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
-
-PRODUCT_GMS_CLIENTID_BASE ?= android-motorola
 
 PRODUCT_COPY_FILES += \
     kernel/motorola/msm8610/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -326,3 +314,5 @@ PRODUCT_COPY_FILES += \
 
 # Inhert dalvik heap values from aosp
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+
+$(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
