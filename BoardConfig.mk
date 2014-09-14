@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The Android Open-Source Project
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+-include vendor/motorola/condor/BoardConfigVendor.mk
 
-LOCAL_PATH := device/moto/condor
+BOARD_VENDOR := motorola-qcom
+
+LOCAL_PATH := device/motorola/condor
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Platform
+TARGET_BOARD_PLATFORM := msm8610
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno302
+
+# Architecture
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
@@ -30,25 +37,19 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 # Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MSM8610
 TARGET_NO_BOOTLOADER := true
 
+# Kernel
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8610
 TARGET_KERNEL_CONFIG := cm_condor_defconfig
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags vmalloc=400M androidboot.write_protect=0
 
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno302
-TARGET_NO_RADIOIMAGE := true
-TARGET_BOARD_PLATFORM := msm8610
-TARGET_BOOTLOADER_BOARD_NAME := MSM8610
-TARGET_BOARD_INFO_FILE := $(LOCAL_PATH)/board-info.txt
-BOARD_VENDOR := motorola-qcom
 
 WLAN_MODULES:
 	mkdir -p $(KERNEL_MODULES_OUT)/pronto
@@ -66,27 +67,38 @@ TARGET_NO_RPC := true
 # Use qcom power hal
 TARGET_POWERHAL_VARIANT := qcom
 
-#TARGET_QCOM_DISPLAY_VARIANT := caf-new
-#TARGET_USES_QCOM_BSP := true
-
+# Qualcomm support
+TARGET_QCOM_DISPLAY_VARIANT := caf-new
+TARGET_USES_QCOM_BSP := true
 BOARD_USES_QCOM_HARDWARE := true
 
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
-#APP2sd
-TARGET_EXTERNAL_APPS = sdcard1
-
 # Global flags
 COMMON_GLOBAL_CFLAGS += -DMOTOROLA_UIDS -DQCOM_HARDWARE
+
+# Motorola
 TARGET_USES_MOTOROLA_LOG := true
+
+# Number of supplementary service groups allowed by init
 TARGET_NR_SVC_SUPP_GIDS := 32
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := false
 
+# Display
 BOARD_EGL_CFG := $(LOCAL_PATH)/egl.cfg
-
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+TARGET_QCOM_DISPLAY_VARIANT := caf-new
+TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
+TARGET_DISPLAY_USE_RETIRE_FENCE := true
+
+# Media
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+TARGET_QCOM_MEDIA_VARIANT := caf-new
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
@@ -99,12 +111,13 @@ WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
+# Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_DEEP_BUFFER_PRIMARY := true
 AUDIO_FEATURE_DYNAMIC_VOLUME_MIXER := true
 
-
+# Encryption
 TARGET_HW_DISK_ENCRYPTION := true
 
 # Hardware tunables framework
@@ -116,6 +129,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 BLUETOOTH_HCI_USE_MCT := true
 
+# Partitions & Storage
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10526720
@@ -131,8 +145,6 @@ BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 40
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
-
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
@@ -202,5 +214,3 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 endif
 
 PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
-
--include vendor/moto/condor/BoardConfigVendor.mk
