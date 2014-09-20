@@ -247,8 +247,7 @@ PRODUCT_PACKAGES += \
 
 # OpenDelta
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.delta.version=VERSION \
-    ro.opendelta.device=condor
+    ro.delta.version=VERSION
 
 PRODUCT_PACKAGES += OpenDelta
 
@@ -280,6 +279,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=1024
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opendelta.device=condor \
     ro.build.version.qcom=AU_LINUX_ANDROID_LNX.LA.3.5.1_RB1.04.04.02.048.020 \
     persist.sys.logkit.ctrlcode=0 \
     ro.vendor.extension_library=/vendor/lib/libqc-opt.so \
