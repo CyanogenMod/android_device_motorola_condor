@@ -87,6 +87,9 @@ BOARD_EGL_CFG := $(LOCAL_PATH)/egl.cfg
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
 
+# APP2sd
+TARGET_EXTERNAL_APPS = sdcard1
+
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
 BOARD_WLAN_DEVICE := qcwcn
