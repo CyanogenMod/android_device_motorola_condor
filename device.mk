@@ -108,14 +108,6 @@ DEVICE_PACKAGE_OVERLAYS := \
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    MagicSmokeWallpapers \
-    VisualizationWallpapers \
-    librs_jni
-
 PRODUCT_PACKAGES += \
     gralloc.msm8610 \
     libgenlock \
