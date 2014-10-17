@@ -51,6 +51,14 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 an
 
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
+
+WLAN_MODULES:
+	mkdir -p $(KERNEL_MODULES_OUT)/pronto
+	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
+	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+
+TARGET_KERNEL_MODULES += WLAN_MODULES
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -87,8 +95,9 @@ BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-WIFI_DRIVER_FW_PATH_STA := ""
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
