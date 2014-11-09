@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2014 Prashant Gahlot (proxthehacker@gmail.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -73,9 +73,6 @@ BOARD_USES_QCOM_HARDWARE := true
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
-
-# APP2sd
-TARGET_EXTERNAL_APPS = sdcard1
 
 # Global flags
 COMMON_GLOBAL_CFLAGS += -DMOTOROLA_UIDS -DQCOM_HARDWARE
@@ -199,5 +196,21 @@ BOARD_SEPOLICY_UNION += \
 ifneq ($(TARGET_BUILD_VARIANT),user)
     BOARD_SEPOLICY_UNION += su.te
 endif
+
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
+
+MALLOC_IMPL := dlmalloc
+
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+  ifeq ($(TARGET_BUILD_VARIANT),user)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+      WITH_DEXPREOPT_BOOT_IMG_ONLY := false
+    endif
+  endif
+endif
+WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
 
 PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))

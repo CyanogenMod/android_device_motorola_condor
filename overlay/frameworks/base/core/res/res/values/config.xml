@@ -234,41 +234,8 @@
     <!-- Default interface to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>
 
-    <!-- Whether to enable auto provisioning the app for new SIM card on boot.-->
-    <bool name="config_auto_provision_enable">true</bool>
-
-    <!-- We dont have different firmware for wifi modes, prevent reloading it -->
-    <bool name="config_wifiApFirmwareReload">false</bool>
-
     <!-- Boolean indicating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true-->
     <bool name="skip_restoring_network_selection">true</bool>
-
-    <!-- Hardware 'face' keys present on the device, stored as a bit field.
-        This integer should equal the sum of the corresponding value for each
-        of the following keys present:
-            1 - Home
-            2 - Back
-            4 - Menu
-            8 - Assistant (search)
-            16 - App switch
-            32 - Camera
-        For example, a device with Home, Back and Menu keys would set this
-        config to 7. -->
-    <integer name="config_deviceHardwareKeys">0</integer>
-
-        <!-- Performance profiles -->
-    <string name="config_perf_profile_prop">sys.perf.profile</string>
-    <string name="config_perf_profile_default_entry">1</string>
-
-	<!-- Enable the option to check proximity sensor when deciding whether to	
-         turn the screen on
-         NOTE ! - Enable for devices that have a fast response proximity sensor	
-    -->	
-    <bool name="config_proximityCheckOnWake">true</bool>
-    <integer name="config_proximityCheckTimeout">400</integer>
-
-    <!-- Does the notification LED support multiple colors? Used to decide if the user can change the colors -->
-    <bool name="config_multiColorNotificationLed">false</bool>
 
 </resources>
