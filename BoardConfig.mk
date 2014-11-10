@@ -148,7 +148,7 @@ HAVE_SELINUX := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    $(LOCAL_PATH)/sepolicy
+    device/motorola/condor/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     adbd.te \
@@ -212,5 +212,3 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
-
-PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
