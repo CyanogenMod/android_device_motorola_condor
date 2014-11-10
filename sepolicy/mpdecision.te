@@ -26,5 +26,3 @@ allow mpdecision power_control_device:chr_file { write open };
 allow mpdecision sysfs_devices_system_cpu:file write;
 allow mpdecision mediaserver:dir search;
 allow mpdecision mediaserver:file { read open };
-allow mpdecision system:dir search;
-allow mpdecision system:file { read open };

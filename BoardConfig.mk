@@ -148,11 +148,9 @@ HAVE_SELINUX := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    $(LOCAL_PATH)/sepolicy
+    device/motorola/condor/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    adbd.te \
-    app.te \
     bluetooth_loader.te \
     bridge.te \
     camera.te \
@@ -174,7 +172,6 @@ BOARD_SEPOLICY_UNION += \
     nfc.te \
     property_contexts \
     property.te \
-    qcom.te \
     qmux.te \
     radio.te \
     rild.te \
@@ -184,7 +181,7 @@ BOARD_SEPOLICY_UNION += \
     sensors.te \
     shell.te \
     surfaceflinger.te \
-    system.te \
+    system_server.te \
     tee.te \
     te_macros \
     thermald.te \
@@ -213,4 +210,3 @@ ifeq ($(HOST_OS),linux)
 endif
 WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
 
-PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))

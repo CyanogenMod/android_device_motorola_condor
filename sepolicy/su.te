@@ -1,1 +1,1 @@
-allow system su:binder call;
+allow system_server su:binder call;
