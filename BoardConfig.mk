@@ -145,6 +145,9 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.qcom
 BOARD_HAS_NO_SELECT_BUTTON := true
 HAVE_SELINUX := true
 
+# SELinux
+-include device/qcom/sepolicy/sepolicy.mk
+
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
