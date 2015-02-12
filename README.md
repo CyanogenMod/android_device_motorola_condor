@@ -26,7 +26,7 @@ How to build:
 Initialize repo:
 
     repo init -u git://github.com/CyanogenMod/android.git -b cm-12.0
-    curl --create-dirs -L -o .repo/local_manifests/manifest_motorola_condor.xml -O -L https://raw.githubusercontent.com/skrichz/android_device_motorola_condor/manifests/manifest_motorola_condor.xml
+    curl --create-dirs -L -o .repo/local_manifests/manifest_motorola_condor.xml -O -L https://raw.githubusercontent.com/skritchz/android_device_motorola_condor/cm-12.0/manifests/manifest_motorola_condor.xml
     repo sync
 
 Compile:
