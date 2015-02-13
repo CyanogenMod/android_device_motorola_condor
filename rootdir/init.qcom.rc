@@ -243,6 +243,8 @@ on post-fs-data
     mkdir /data/time/ 0700 system system
 
     mkdir /data/audio/ 0770 media audio
+    # Create directory used by display clients
+    mkdir /data/misc/display 0770 root system
 
     setprop vold.post_fs_data_done 1
 
