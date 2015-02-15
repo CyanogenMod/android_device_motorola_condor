@@ -24,23 +24,23 @@ LOCAL_PATH := device/motorola/condor
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
-    $(LOCAL_PATH)/rootdir/init.mmi.boot.sh:root/init.mmi.boot.sh \
-    $(LOCAL_PATH)/rootdir/init.class_main.sh:root/init.class_main.sh \
-    $(LOCAL_PATH)/rootdir/init.mmi.rc:root/init.mmi.rc \
-    $(LOCAL_PATH)/rootdir/init.mmi.touch.sh:root/init.mmi.touch.sh \
-    $(LOCAL_PATH)/rootdir/init.mmi.usb.rc:root/init.mmi.usb.rc \
-    $(LOCAL_PATH)/rootdir/init.mmi.usb.sh:root/init.mmi.usb.sh \
-    $(LOCAL_PATH)/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-    $(LOCAL_PATH)/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
-    $(LOCAL_PATH)/rootdir/init.qcom.rc:root/init.qcom.rc \
-    $(LOCAL_PATH)/rootdir/init.qcom.sh:root/init.qcom.sh \
-    $(LOCAL_PATH)/rootdir/init.qcom.ssr.sh:root/init.qcom.ssr.sh \
-    $(LOCAL_PATH)/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
-    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
-    $(LOCAL_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    $(LOCAL_PATH)/rootdir/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    $(LOCAL_PATH)/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc
+    $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
+    $(LOCAL_PATH)/ramdisk/init.mmi.boot.sh:root/init.mmi.boot.sh \
+    $(LOCAL_PATH)/ramdisk/init.class_main.sh:root/init.class_main.sh \
+    $(LOCAL_PATH)/ramdisk/init.mmi.rc:root/init.mmi.rc \
+    $(LOCAL_PATH)/ramdisk/init.mmi.touch.sh:root/init.mmi.touch.sh \
+    $(LOCAL_PATH)/ramdisk/init.mmi.usb.rc:root/init.mmi.usb.rc \
+    $(LOCAL_PATH)/ramdisk/init.mmi.usb.sh:root/init.mmi.usb.sh \
+    $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+    $(LOCAL_PATH)/ramdisk/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
+    $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
+    $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh \
+    $(LOCAL_PATH)/ramdisk/init.qcom.ssr.sh:root/init.qcom.ssr.sh \
+    $(LOCAL_PATH)/ramdisk/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
+    $(LOCAL_PATH)/ramdisk/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/ramdisk/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    $(LOCAL_PATH)/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    $(LOCAL_PATH)/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc
 
 # Prebuilt
 PRODUCT_COPY_FILES += \
