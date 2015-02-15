@@ -1,3 +1,7 @@
+# Boot animation
+TARGET_SCREEN_WIDTH := 540
+TARGET_SCREEN_HEIGHT := 960
+
 $(call inherit-product, device/motorola/condor/full_condor.mk)
 
 # Inherit some common CM stuff.
