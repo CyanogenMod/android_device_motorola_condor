@@ -254,7 +254,7 @@ PRODUCT_PACKAGES += OpenDelta
 
 # Charger - moto uses a funky ro.bootmode=mot-charger
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/moto_com.sh:system/bin/moto_com.sh
+    $(LOCAL_PATH)/prebuilt/system/bin/moto_com.sh:system/bin/moto_com.sh
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
