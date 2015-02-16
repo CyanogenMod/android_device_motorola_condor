@@ -185,6 +185,7 @@ PRODUCT_PACKAGES += \
     wlan_module_symlink \
     wlan_persist_symlink \
     wcnss_service
+	
 
 PRODUCT_PACKAGES += libion
 
@@ -235,8 +236,12 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     hostapd.accept \
+	hostapd_default.conf \
     hostapd.deny \
-    hostapd_default.conf
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf \
+	dhcpcd.conf \
 
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin

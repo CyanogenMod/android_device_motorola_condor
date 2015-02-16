@@ -53,6 +53,10 @@ mm.enable.qcom_parser=37491
 # 1:ERROR 2:HIGH 4:LOW 0:NOlogs 7:AllLogs
 vidc.debug.level=1
 
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+
 #
 # system props for widevine
 #
