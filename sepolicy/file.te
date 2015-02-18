@@ -1,0 +1,9 @@
+# Battery health
+type batt_health_data_file, file_type, data_file_type;
+type sysfs_batt_health, fs_type, sysfs_type;
+
+# CMHW
+type vibeamp_sysfs, fs_type, sysfs_type;
+
+# PDS
+type pds_file, file_type;

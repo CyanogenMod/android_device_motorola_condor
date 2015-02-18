@@ -1,0 +1,3 @@
+# for init_falcon to read filesystem type
+allow init_shell userdata_block_device:blk_file { getattr open read ioctl };
+allow init_shell utags_block_device:blk_file { open read };

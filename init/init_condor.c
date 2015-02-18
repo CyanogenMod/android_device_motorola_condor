@@ -53,11 +53,12 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
+	property_set("ro.product.model", "Moto E");
     property_get("ro.boot.radio", radio);
     if (ISMATCH(radio, "0x1")) {
         /* xt1021 */
         property_set("ro.product.device", "condor_umts");
-        property_set("ro.product.model", "XT1021");
+        property_set("ro.build.product", "condor_umts");
         property_set("ro.build.description", "condor_retgb-user 4.4.4 KXC21.5-40 46 release-keys");
         property_set("ro.build.fingerprint", "motorola/condor_retgb/condor_umts:4.4.4/KXC21.5-40/46:user/release-keys");
         property_set("ro.mot.build.customerid", "retgb");
@@ -65,7 +66,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     } else if (ISMATCH(radio, "0x5")) {
         /* xt1022 */
         property_set("ro.product.device", "condor_umtsds");
-        property_set("ro.product.model", "XT1022");
+        property_set("ro.build.product", "condor_umtsds");
         property_set("ro.build.description", "condor_retaildsds-user 4.4.4 KXC21.5-40 46 release-keys");
         property_set("ro.build.fingerprint", "motorola/condor_retaildsds/condor_umtsds:4.4.4/KXC21.5-40/46:user/release-keys");
         property_set("ro.mot.build.customerid", "retaildsdsall");
@@ -75,7 +76,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     } else if (ISMATCH(radio, "0x6")) {
         /* xt1023 */
         property_set("ro.product.device", "condor_umts");
-        property_set("ro.product.model", "XT1023");
+        property_set("ro.build.product", "condor_umts");
         property_set("ro.build.description", "condor_retuaws-user 4.4.3 KXC21.5-34 26 release-keys");
         property_set("ro.build.fingerprint", "motorola/condor_retuaws/condor_umts:4.4.3/KXC21.5-34/26:user/release-keys");
         property_set("ro.mot.build.customerid", "retusa_aws");

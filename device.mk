@@ -118,8 +118,7 @@ PRODUCT_PACKAGES += \
     copybit.msm8610 \
     hwcomposer.msm8610 \
     memtrack.msm8610 \
-    power.msm8610 \
-    liboverlay
+    power.msm8610
 
 # QRNG
 PRODUCT_PACKAGES += qrngp
@@ -162,7 +161,6 @@ PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libstagefrighthw \
     libOmxCore \
-    libmm-omxcore \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
@@ -185,9 +183,6 @@ PRODUCT_PACKAGES += \
     wlan_module_symlink \
     wlan_persist_symlink \
     wcnss_service
-	
-
-PRODUCT_PACKAGES += libion
 
 PRODUCT_PACKAGES += \
     librs_jni \
@@ -241,16 +236,10 @@ PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf \
-	dhcpcd.conf \
+	dhcpcd.conf
 
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
-
-# OpenDelta
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.delta.version=VERSION
-
-PRODUCT_PACKAGES += OpenDelta
 
 # Charger - moto uses a funky ro.bootmode=mot-charger
 PRODUCT_COPY_FILES += \

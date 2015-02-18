@@ -23,13 +23,18 @@ This branch is for building CyanogenMod 12.0 Firmware.
 How to build:
 -------------
 
-Initialize repo:
+To get started with Android/CyanogenMod, you'll need to get
+familiar with [Git and Repo](http://source.android.com/source/using-repo.html).
 
-    repo init -u git://github.com/CyanogenMod/android.git -b cm-12.0
-    curl --create-dirs -L -o .repo/local_manifests/manifest_motorola_condor.xml -O -L https://raw.githubusercontent.com/skritchz/android_device_motorola_condor/cm-12.0/manifests/manifest_motorola_condor.xml
+To initialize your local repository using the Motorola-CyanogenMod trees, use a command like this:
+
+    repo init -u git://github.com/Motorola-CyanogenMod/android.git -b cm-12.0
+
+Then to sync up:
+
     repo sync
 
-Compile:
+Please see the [CyanogenMod Wiki](http://wiki.cyanogenmod.org/) for building instructions.
 
-    . build/envsetup.sh
-    brunch cm_condor-userdebug
+For more information on this Github Organization and how it is structured, 
+please [read the wiki article](http://wiki.cyanogenmod.org/w/Github_Organization)
