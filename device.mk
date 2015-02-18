@@ -26,36 +26,21 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
     $(LOCAL_PATH)/ramdisk/init.mmi.boot.sh:root/init.mmi.boot.sh \
-    $(LOCAL_PATH)/ramdisk/init.class_main.sh:root/init.class_main.sh \
-    $(LOCAL_PATH)/ramdisk/init.mmi.rc:root/init.mmi.rc \
     $(LOCAL_PATH)/ramdisk/init.mmi.touch.sh:root/init.mmi.touch.sh \
     $(LOCAL_PATH)/ramdisk/init.mmi.usb.rc:root/init.mmi.usb.rc \
-    $(LOCAL_PATH)/ramdisk/init.mmi.usb.sh:root/init.mmi.usb.sh \
-    $(LOCAL_PATH)/ramdisk/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-    $(LOCAL_PATH)/ramdisk/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
     $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
-    $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh \
     $(LOCAL_PATH)/ramdisk/init.qcom.ssr.sh:root/init.qcom.ssr.sh \
-    $(LOCAL_PATH)/ramdisk/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
-    $(LOCAL_PATH)/ramdisk/init.target.rc:root/init.target.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    $(LOCAL_PATH)/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
     $(LOCAL_PATH)/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc
 
 # Prebuilt
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     $(LOCAL_PATH)/prebuilt/system/etc/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
     $(LOCAL_PATH)/prebuilt/system/etc/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
     $(LOCAL_PATH)/prebuilt/system/etc/init.crda.sh:system/etc/init.crda.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.efs.sync.sh:system/etc/init.efs.sync.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh
+    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
@@ -240,10 +225,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
-
-# Charger - moto uses a funky ro.bootmode=mot-charger
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/bin/moto_com.sh:system/bin/moto_com.sh
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
