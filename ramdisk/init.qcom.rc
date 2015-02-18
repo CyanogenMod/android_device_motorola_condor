@@ -156,6 +156,8 @@ on post-fs-data
     # We chown/chmod /persist again so because mount is run as root + defaults
     chown system system /persist
     chmod 0771 /persist
+	restorecon_recursive /persist
+
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
@@ -603,7 +605,7 @@ on property:persist.radio.multisim.config=dsds
     start mmi-ril-daemon1
 
 on property:vold.decrypt=trigger_restart_framework
-    stop rild
+    stop ril-daemon
 
 service mmi-ril-daemon /system/bin/rild
     class main
@@ -613,10 +615,10 @@ service mmi-ril-daemon /system/bin/rild
     user root
     group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
 
-service mmi-ril-daemon1 /system/bin/rild -c 1
+service mmi-ril-daemon1 /system/bin/rild -c 2
     class main
-    socket rild1 stream 660 root radio
-    socket rild-debug1 stream 660 radio system
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
     disabled
@@ -680,21 +682,6 @@ service qmuxd /system/bin/qmuxd
     user radio
     group radio audio bluetooth gps qcom_diag
 
-service qrngd /system/bin/qrngd -f
-    class main
-    user root
-    group root
-
-on property:sys.boot_completed=1
-    start qrngp
-
-service qrngp /system/bin/qrngp
-    class main
-    user root
-    group root
-    oneshot
-    disabled
-
 service qseecomd /system/bin/qseecomd
     class late_start
     user root
@@ -756,7 +743,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 \
+    -puse_p2p_group_interface=1 \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -770,7 +757,6 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT

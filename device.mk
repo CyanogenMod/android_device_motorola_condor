@@ -105,9 +105,6 @@ PRODUCT_PACKAGES += \
     memtrack.msm8610 \
     power.msm8610
 
-# QRNG
-PRODUCT_PACKAGES += qrngp
-
 PRODUCT_PACKAGES += \
     audio.msm8610 \
     audio_policy.msm8610
@@ -135,11 +132,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     aplogd \
     charge_only_mode
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
 
 # Omx
 PRODUCT_PACKAGES += \
