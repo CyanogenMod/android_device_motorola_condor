@@ -593,7 +593,7 @@ service mmi-ril-daemon1 /system/bin/rild -c 2
     group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
     disabled
 
-service mmi-touch-sh /system/bin/logwrapper /system/bin/sh /init.mmi.touch.sh synaptics aps
+service mmi-touch-sh /system/bin/sh /init.mmi.touch.sh synaptics aps
     class late_start
     user root
     oneshot
