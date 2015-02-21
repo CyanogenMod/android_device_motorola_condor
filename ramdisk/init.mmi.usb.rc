@@ -49,7 +49,7 @@ on boot
     chown system system /sys/class/android_usb/android0/secure
     chmod 0660 /sys/class/android_usb/android0/secure
 
-service mmi-usb-sh /system/bin/logwrapper /system/bin/sh /init.mmi.usb.sh
+service mmi-usb-sh /system/bin/sh /init.mmi.usb.sh
     class core
     user root
     oneshot
