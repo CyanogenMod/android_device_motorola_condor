@@ -454,6 +454,9 @@ on boot
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal_ctrl
 
+    # Enable rotator
+    chown system system /sys/class/input/event1/device/device/enable
+
     # setup trace dir
     mkdir /cache/trace 0777 root shell
     chown root shell /cache/trace
