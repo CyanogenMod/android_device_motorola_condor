@@ -130,7 +130,6 @@ PRODUCT_PACKAGES += \
 
 # Motorola
 PRODUCT_PACKAGES += \
-    aplogd \
     charge_only_mode
 
 # Omx
@@ -150,11 +149,6 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc
 
 PRODUCT_BOOT_JARS += qcmediaplayer
-
-# QRNG
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
 
 PRODUCT_PACKAGES += \
     wlan_module_symlink \
@@ -220,10 +214,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
-
-# Recovery
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.forbid_format=/fsg,/firmware,/persist,/boot
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true
