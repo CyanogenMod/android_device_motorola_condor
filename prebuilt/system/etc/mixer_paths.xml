@@ -113,6 +113,11 @@
 	<ctl name="QCHAT_Tx Mixer INTERNAL_BT_SCO_TX_QCHAT" value="0" />
 	<!-- QCHAT End -->
 
+	<!-- BT SCO WB Sample Rate -->
+	<path name="bt-sco-wb-samplerate">
+		<ctl name="Internal BTSCO SampleRate" value="16000" />
+	</path>
+
 	<!-- These are audio route (FE to BE) specific mixer settings -->
 	<path name="deep-buffer-playback">
 		<ctl name="SEC_MI2S_RX Audio Mixer MultiMedia1" value="1" />
