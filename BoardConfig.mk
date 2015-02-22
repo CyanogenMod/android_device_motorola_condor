@@ -181,9 +181,6 @@ BOARD_SEPOLICY_UNION += \
     system_app.te \
     thermal-engine.te
 
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-
 MALLOC_IMPL := dlmalloc
 
 # Enable dex-preoptimization to speed up first boot sequence
