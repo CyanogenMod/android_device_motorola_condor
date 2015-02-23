@@ -511,13 +511,6 @@ service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh
     user root
     oneshot
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system fm_radio
-    disabled
-    oneshot
-
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
