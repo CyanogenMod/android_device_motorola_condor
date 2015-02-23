@@ -23,36 +23,19 @@ LOCAL_PATH := device/motorola/condor
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ramdisk/fstab.qcom:root/fstab.qcom \
-    $(LOCAL_PATH)/ramdisk/init.mmi.boot.sh:root/init.mmi.boot.sh \
-    $(LOCAL_PATH)/ramdisk/init.mmi.touch.sh:root/init.mmi.touch.sh \
-    $(LOCAL_PATH)/ramdisk/init.mmi.usb.rc:root/init.mmi.usb.rc \
-    $(LOCAL_PATH)/ramdisk/init.qcom.rc:root/init.qcom.rc \
-    $(LOCAL_PATH)/ramdisk/init.qcom.ssr.sh:root/init.qcom.ssr.sh \
-    $(LOCAL_PATH)/ramdisk/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    $(LOCAL_PATH)/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc
+# Ramdisk
+ PRODUCT_COPY_FILES += \
+     $(call find-copy-subdir-files,*,${LOCAL_PATH}/ramdisk,root)
 
 # Prebuilt
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.crda.sh:system/etc/init.crda.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+     $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/system,system)
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/prebuilt/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/prebuilt/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml
 
 PRODUCT_COPY_FILES += \
