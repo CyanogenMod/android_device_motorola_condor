@@ -176,10 +176,13 @@ BOARD_SEPOLICY_UNION += \
     platform_app.te \
     property_contexts \
     property.te \
+    system_app.te \
+    system_init.te \
     rild.te \
     rmt_storage.te \
-    system_app.te \
-    thermal-engine.te
+    thermal-engine.te \
+    ueventd.te \
+    vold.te
 
 MALLOC_IMPL := dlmalloc
 

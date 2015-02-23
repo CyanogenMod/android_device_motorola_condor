@@ -1,0 +1,3 @@
+#============= vold ==============
+allow vold userdata_block_device:blk_file { read write ioctl open getattr };
+
