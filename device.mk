@@ -152,8 +152,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     qcmediaplayer
 
-PRODUCT_BOOT_JARS += qcmediaplayer
-
 PRODUCT_PACKAGES += \
     wlan_module_symlink \
     wlan_persist_symlink \
