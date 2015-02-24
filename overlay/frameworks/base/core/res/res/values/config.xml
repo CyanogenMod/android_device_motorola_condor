@@ -239,7 +239,7 @@
     <bool name="skip_restoring_network_selection">true</bool>
 
     <!-- Boolean indicating whether Softap requires reloading AP firmware -->
-    <bool name="config_wifiApFirmwareReload">false</bool
+    <bool name="config_wifiApFirmwareReload">false</bool>
 
     <!-- Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
