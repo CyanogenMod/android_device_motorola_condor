@@ -199,3 +199,6 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
+
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
