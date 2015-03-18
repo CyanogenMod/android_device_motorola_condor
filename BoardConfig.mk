@@ -33,7 +33,10 @@ TARGET_CPU_SMP := true
 TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := krait
+TARGET_CPU_VARIANT := cortex-a7
+
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8610
@@ -41,7 +44,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Kernel
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_CUSTOM_BOOTIMG_MK := device/motorola/condor/mkbootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8610
 TARGET_KERNEL_CONFIG := cm_condor_defconfig
 BOARD_KERNEL_BASE := 0x00000000
