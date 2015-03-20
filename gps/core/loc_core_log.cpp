@@ -41,6 +41,7 @@ void LocPosMode::logv() const
               "preferred time: %d\n  credentials: %s  provider: %s",
               loc_get_position_mode_name(mode),
               loc_get_position_recurrence_name(recurrence),
+              loc_get_aiding_data_mask_names(mask),
               min_interval,
               preferred_accuracy,
               preferred_time,
