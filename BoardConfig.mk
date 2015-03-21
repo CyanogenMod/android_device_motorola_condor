@@ -179,7 +179,6 @@ BOARD_SEPOLICY_UNION += \
     property_contexts \
     property.te \
     system_app.te \
-    system_init.te \
     system_server.te \
     rild.te \
     rmt_storage.te \
