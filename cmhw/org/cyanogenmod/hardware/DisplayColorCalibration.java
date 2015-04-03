@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,36 +16,35 @@
 
 package org.cyanogenmod.hardware;
 
+import java.io.File;
+import java.util.Scanner;
 import org.cyanogenmod.hardware.util.FileUtils;
 
-import java.io.File;
-
 public class DisplayColorCalibration {
-
-    private static final String KCAL_TUNING_FILE = "/sys/devices/virtual/graphics/fb0/kcal_enable";
+    private static final String COLOR_FILE = "/sys/class/graphics/fb0/rgb";
 
     public static boolean isSupported() {
-        File file = new File(KCAL_TUNING_FILE);
-        return file.exists();
+        File f = new File(COLOR_FILE);
+        return f.exists();
     }
 
-    public static int getMaxValue() {
-        return 256;
+    public static int getMaxValue()  {
+        return 32768;
     }
 
-    public static int getMinValue() {
-        return 35;
-    }
-
-    public static int getDefValue() {
+    public static int getMinValue()  {
         return 255;
     }
 
-    public static String getCurColors() {
-        return FileUtils.readOneLine(KCAL_TUNING_FILE);
+    public static int getDefValue() {
+        return getMaxValue();
+    }
+
+    public static String getCurColors()  {
+        return FileUtils.readOneLine(COLOR_FILE);
     }
 
     public static boolean setColors(String colors) {
-        return FileUtils.writeLine(KCAL_TUNING_FILE, colors);
+        return FileUtils.writeLine(COLOR_FILE, colors);
     }
 }
