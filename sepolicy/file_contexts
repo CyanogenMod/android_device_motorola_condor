@@ -1,5 +1,4 @@
 # Binaries
-/system/bin/akmd8963                                        u:object_r:akmd8963_exec:s0
 /system/bin/batt_health                                     u:object_r:batt_health_exec:s0
 /system/bin/dbvc_atvc_property_set                          u:object_r:atvc_exec:s0
 /system/bin/hardware_revisions.sh  u:object_r:hw_revs_exec:s0
