@@ -162,7 +162,6 @@ BOARD_SEPOLICY_DIRS += \
     device/motorola/condor/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    akmd8963.te \
     atvc.te \
     batt_health.te \
     device.te \
