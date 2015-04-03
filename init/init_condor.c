@@ -62,6 +62,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "condor_retgb-user 4.4.4 KXC21.5-40 46 release-keys");
         property_set("ro.build.fingerprint", "motorola/condor_retgb/condor_umts:4.4.4/KXC21.5-40/46:user/release-keys");
         property_set("ro.mot.build.customerid", "retgb");
+        property_set("ro.telephony.default_network", "0");
         property_set("persist.radio.multisim.config", "");
     } else if (ISMATCH(radio, "0x5")) {
         /* xt1022 */
@@ -70,6 +71,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "condor_retaildsds-user 4.4.4 KXC21.5-40 46 release-keys");
         property_set("ro.build.fingerprint", "motorola/condor_retaildsds/condor_umtsds:4.4.4/KXC21.5-40/46:user/release-keys");
         property_set("ro.mot.build.customerid", "retaildsdsall");
+        property_set("ro.telephony.default_network", "0,1");
         property_set("persist.radio.multisim.config", "dsds");
         property_set("persist.radio.dont_use_dsd", "true");
         property_set("persist.radio.plmn_name_cmp", "1");
@@ -80,6 +82,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "condor_retuaws-user 4.4.3 KXC21.5-34 26 release-keys");
         property_set("ro.build.fingerprint", "motorola/condor_retuaws/condor_umts:4.4.3/KXC21.5-34/26:user/release-keys");
         property_set("ro.mot.build.customerid", "retusa_aws");
+        property_set("ro.telephony.default_network", "0");
         property_set("persist.radio.multisim.config", "");
     }
     property_get("ro.product.device", device);
