@@ -68,9 +68,6 @@ TARGET_NO_RPC := true
 # Use qcom power hal
 TARGET_POWERHAL_VARIANT := qcom
 
-# Qcom support
-BOARD_USES_QCOM_HARDWARE := true
-
 # Global flags
 COMMON_GLOBAL_CFLAGS += -DMOTOROLA_UIDS -DQCOM_HARDWARE
 TARGET_USES_MOTOROLA_LOG := true
@@ -106,6 +103,7 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QC_TIME_SERVICES := true
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
