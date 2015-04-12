@@ -70,9 +70,6 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
-    # CM: We use our own ril-daemon service definition, see mmi-ril-daemon
-    stop ril-daemon
-
     # Configure coredump
     write /proc/sys/kernel/core_pattern "|/system/bin/coredump %e %p %t"
     write /proc/self/coredump_filter "0x7f"
@@ -542,13 +539,13 @@ service mmi-boot-sh /system/bin/sh /init.mmi.boot.sh
 
 on property:persist.radio.multisim.config=dsds
     stop ril-daemon
-    start mmi-ril-daemon
-    start mmi-ril-daemon1
+    start ril-daemon
+    start ril-daemon1
 
 on property:vold.decrypt=trigger_restart_framework
     stop ril-daemon
 
-service mmi-ril-daemon /system/bin/rild
+service_redefine ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
@@ -556,7 +553,7 @@ service mmi-ril-daemon /system/bin/rild
     user root
     group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
 
-service mmi-ril-daemon1 /system/bin/rild -c 2
+service ril-daemon1 /system/bin/rild -c 2
     class main
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
