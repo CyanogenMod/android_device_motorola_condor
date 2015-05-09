@@ -19,6 +19,9 @@ DEVICE_PROVISIONED=1
 persist.radio.msgtunnel.start=false
 persist.radio.atfwd.start=false
 
+# ART
+dalvik.vm.dex2oat-flags=--no-watch-dog
+
 #
 # system props for the cne module
 #
