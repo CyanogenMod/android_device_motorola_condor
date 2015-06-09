@@ -288,4 +288,7 @@
     <bool name="config_dozeAfterScreenOff">true</bool>
 
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <bool name="config_batterySdCardAccessibility">true</bool>
 </resources>
