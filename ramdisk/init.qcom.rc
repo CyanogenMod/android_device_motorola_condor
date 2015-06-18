@@ -484,27 +484,6 @@ service batt_health /system/bin/batt_health
     group mot_pwric
     disabled
 
-on property:vold.decrypt=trigger_restart_framework
-    start config_bluetooth
-
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh
-    class core
-    user root
-    oneshot
-
-on property:bluetooth.hciattach=false
-    setprop bluetooth.status off
-
-on property:bluetooth.hciattach=true
-    start hciattach
-
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
 service hw_revs /system/bin/hardware_revisions.sh
     class main
     user system
