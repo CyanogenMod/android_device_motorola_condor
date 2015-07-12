@@ -13,13 +13,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="screen_gestures_panel_title">Bevægelser</string>
-  <string name="screen_gestures_panel_summary">Anvend bevægelser til at udføre handlinger</string>
-  <string name="ambient_display_title">Inaktivitetsvisning</string>
-  <string name="ambient_display_enable_title">Inaktivitetsvisning</string>
-  <string name="ambient_display_enable_summary">Tænder skærmen når du modtager notifikationer</string>
-  <string name="hand_wave_gesture_title">Vink med hånden</string>
-  <string name="hand_wave_gesture_summary">Vibrér, hvis der er notifikationer, når du vinker over skærmen</string>
+  <string name="screen_gestures_panel_title">Bevegelser</string>
+  <string name="screen_gestures_panel_summary">Bruke bevegelser til å utføre handlinger</string>
+  <string name="ambient_display_title">Omgivelsesskjerm</string>
+  <string name="ambient_display_enable_title">Omgivelsesskjerm</string>
+  <string name="ambient_display_enable_summary">Skru på skjerm når du mottar varsler</string>
+  <string name="hand_wave_gesture_title">Håndvink</string>
+  <string name="hand_wave_gesture_summary">Pulser varsler ved håndvink</string>
   <string name="pocket_gesture_title">Lomme</string>
-  <string name="pocket_gesture_summary">Vibrér, hvis der er notifikationer, når telefonen tages op ad lommen</string>
+  <string name="pocket_gesture_summary">Pulser varsler når du tar opp mobilen fra lommen</string>
 </resources>
