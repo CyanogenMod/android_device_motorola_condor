@@ -36,9 +36,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
 
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml
-
-PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:system/etc/sec_config \
     $(LOCAL_PATH)/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf
 
