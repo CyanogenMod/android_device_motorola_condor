@@ -21,6 +21,7 @@ persist.radio.atfwd.start=false
 
 # ART
 dalvik.vm.dex2oat-flags=--no-watch-dog
+dalvik.vm.dex2oat-swap=false
 
 #
 # system props for the cne module
