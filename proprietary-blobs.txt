@@ -239,6 +239,7 @@ vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxWmaDec.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
+lib/libOmxVdecHevc.so
 bin/btnvtool
 bin/hci_qcomm_init
 vendor/lib/libbtnv.so
