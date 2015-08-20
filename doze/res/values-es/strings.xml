@@ -13,12 +13,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="screen_gestures_panel_title">Keinuak</string>
-  <string name="screen_gestures_panel_summary">Erabili keinuak ekintzak burutzeko</string>
-  <string name="ambient_display_title">Ambient display</string>
-  <string name="ambient_display_enable_title">Ambient display</string>
-  <string name="ambient_display_enable_summary">Esnatu pantaila jakinarazpenak jasotzean</string>
-  <string name="hand_wave_gesture_title">Eskuarekin agurtu</string>
-  <string name="hand_wave_gesture_summary">Jakinarazpen argia eskuarekin agurtzean</string>
-  <string name="pocket_gesture_title">Poltsikoratu</string>
+  <string name="screen_gestures_panel_title">Gestos</string>
+  <string name="screen_gestures_panel_summary">Utilizar gestos para realizar acciones</string>
+  <string name="ambient_display_title">Pantalla ambiente</string>
+  <string name="ambient_display_enable_title">Pantalla ambiente</string>
+  <string name="ambient_display_enable_summary">Activar la pantalla cuando se reciben notificaciones</string>
+  <string name="hand_wave_gesture_title">Agitar con la mano</string>
+  <string name="hand_wave_gesture_summary">Lanzar notificaciones cuando se agite con la mano</string>
+  <string name="pocket_gesture_title">Bolsillo</string>
+  <string name="pocket_gesture_summary">Lanzar notificaciones cuando se saque del bolsillo</string>
 </resources>
