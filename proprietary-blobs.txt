@@ -187,6 +187,7 @@ vendor/lib/libchromatix_ov10820_common.so
 vendor/lib/libchromatix_ov10820_zsl.so
 lib/libmm-qcamera.so
 lib/libmmjpeg_interface.so
+lib/libOmxVdec.so
 lib/libqomx_core.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libmmqjpeg_codec.so
