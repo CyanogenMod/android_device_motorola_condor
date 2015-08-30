@@ -29,7 +29,6 @@ TARGET_BOARD_PLATFORM := msm8610
 # Architecture
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -47,7 +46,7 @@ TARGET_KERNEL_CONFIG := cm_condor_defconfig
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags vmalloc=400M androidboot.write_protect=0
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags vmalloc=400M
 
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
@@ -74,7 +73,6 @@ TARGET_USES_MOTOROLA_LOG := true
 TARGET_NR_SVC_SUPP_GIDS := 32
 
 # Display
-BOARD_EGL_CFG := $(LOCAL_PATH)/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
@@ -97,6 +95,8 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_FM := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
+AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 
 # FM
 TARGET_QCOM_NO_FM_FIRMWARE := true
@@ -159,6 +159,7 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     atvc.te \
     batt_health.te \
+    bootanim.te \
     device.te \
     file.te \
     file_contexts \
@@ -185,14 +186,13 @@ MALLOC_IMPL := dlmalloc
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
+  ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT := true
       WITH_DEXPREOPT_BOOT_IMG_ONLY := false
     endif
   endif
 endif
-WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true

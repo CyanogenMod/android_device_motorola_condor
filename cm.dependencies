@@ -9,7 +9,6 @@
   },
   {
     "repository": "android_kernel_motorola_msm8610",
-    "target_path": "kernel/motorola/msm8610",
-    "branch": "cm-12.0"
+    "target_path": "kernel/motorola/msm8610"
   }
 ]

@@ -102,7 +102,9 @@ lib/libadropbox.so
 lib/libqsap_sdk.so
 bin/dropboxd
 bin/subsystem_ramdump
+lib/libcnefeatureconfig.so
 vendor/lib/libnetmgr.so
+vendor/lib/libcneapiclient.so
 bin/netmgrd
 bin/rmt_storage
 bin/location-mq
@@ -147,7 +149,7 @@ vendor/lib/rfsa/adsp/libadsp_denoise_skel.so
 vendor/lib/rfsa/adsp/libadsp_jpege_skel.so
 vendor/lib/libmmcamera_ar0261.so
 vendor/lib/libchromatix_ar0261_common.so
-vendor/lib/libchromatix_ar0261_preview.so
+vendor/lib/libchromatix_ar0261_snapshot.so
 vendor/lib/libchromatix_ar0261_default_video.so
 lib/libmmcamera_ar0543.so
 lib/libchromatix_ar0543_common.so
@@ -185,6 +187,7 @@ vendor/lib/libchromatix_ov10820_common.so
 vendor/lib/libchromatix_ov10820_zsl.so
 lib/libmm-qcamera.so
 lib/libmmjpeg_interface.so
+lib/libOmxVdec.so
 lib/libqomx_core.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libmmqjpeg_codec.so
@@ -196,6 +199,7 @@ vendor/lib/libmmcamera_tuning.so
 lib/hw/camera.msm8610.so
 lib/hw/sensors.msm8610.so
 vendor/lib/libril-qcril-hook-oem.so
+vendor/lib/libsystem_health_mon.so
 lib/libmotext_inf.so
 lib/libril.so
 app/com.qualcomm.location.apk
@@ -236,6 +240,7 @@ vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxWmaDec.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
+lib/libOmxVdecHevc.so
 bin/btnvtool
 bin/hci_qcomm_init
 vendor/lib/libbtnv.so

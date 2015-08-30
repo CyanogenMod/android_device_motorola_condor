@@ -36,9 +36,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
 
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml
-
-PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:system/etc/sec_config \
     $(LOCAL_PATH)/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf
 
@@ -63,15 +60,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
+    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# This device is xhdpi.  However the platform doesn't
-# currently contain all of the bitmaps at xhdpi density so
-# we do this little trick to fall back to the hdpi version
-# if the xhdpi doesn't exist.
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 DEVICE_PACKAGE_OVERLAYS := \
@@ -126,8 +118,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libdashplayer \
     libOmxCore \
-    libOmxVdec \
-    libOmxVdecHevc \
     libOmxVenc \
     libstagefrighthw \
     qcmediaplayer
@@ -194,6 +184,10 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     dhcpcd.conf
 
+# Doze
+PRODUCT_PACKAGES += \
+    MotoDoze
+
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
 
@@ -232,10 +226,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
     persist.loc.nlp_name=com.qualcomm.services.location \
     ro.gps.agps_provider=1
-
-# Media
-PRODUCT_PROPERTY_OVERRIDEs += \
-    media.stagefright.use-awesome=true
 
 # set default USB configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
