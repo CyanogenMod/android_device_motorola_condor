@@ -127,6 +127,9 @@ persist.dash.avsync.window.msec=100
 
 tunnel.audio.encode = false
 
+# Scheduler
+sys.io.scheduler=fiops
+
 #use VERY_HIGH_QUALITY for audio resampler
 af.resampler.quality=4
 
