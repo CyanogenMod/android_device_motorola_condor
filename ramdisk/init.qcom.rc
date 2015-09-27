@@ -740,4 +740,3 @@ service xtwifi_inet /system/bin/xtwifi-inet-agent
     user gps
     group inet gps
     disabled
-
