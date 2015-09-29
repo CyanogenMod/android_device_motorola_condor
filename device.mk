@@ -78,7 +78,7 @@ PRODUCT_PACKAGES += \
     copybit.msm8610 \
     hwcomposer.msm8610 \
     memtrack.msm8610 \
-    power.msm8610
+    power.condor
 
 PRODUCT_PACKAGES += \
     audio.msm8610 \
