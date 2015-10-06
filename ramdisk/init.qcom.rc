@@ -378,10 +378,6 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
-	
     # AK9863 Magnetometer
     chown compass compass /sys/class/compass/akm8963/enable_acc
     chown compass compass /sys/class/compass/akm8963/enable_mag
@@ -400,10 +396,6 @@ on boot
     chmod 0660 /sys/module/ct406/parameters/ip_enable
     chown system system /sys/module/ct406/parameters/als_delay
     chmod 0660 /sys/module/ct406/parameters/als_delay
-
-    # NFC PN544
-    chown nfc nfc /sys/devices/virtual/misc/pn544/pn544_control_dev
-    chmod 0660 /sys/devices/virtual/misc/pn544/pn544_control_dev
 
     # Change the ownership of touch screen files for tcmd
     chown root mot_tcmd /sys/bus/i2c/drivers/synaptics_dsx_i2c/1-0020/drv_irq
@@ -701,14 +693,6 @@ service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
     class late_start
     disabled
     oneshot
-
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system fm_radio
-    disabled
-    oneshot
-
 
 service iprenew_bt-pan /system/bin/dhcpcd -n
     class late_start
