@@ -156,32 +156,6 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
     device/motorola/condor/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    atvc.te \
-    batt_health.te \
-    bootanim.te \
-    device.te \
-    file.te \
-    file_contexts \
-    hw_revs.te \
-    init.te \
-    init_shell.te \
-    keystore.te \
-    mediaserver.te \
-    mm-qcamerad.te \
-    mpdecision.te \
-    platform_app.te \
-    property_contexts \
-    property.te \
-    system_app.te \
-    system_init.te \
-    system_server.te \
-    rild.te \
-    rmt_storage.te \
-    thermal-engine.te \
-    ueventd.te \
-    vold.te
-
 MALLOC_IMPL := dlmalloc
 
 # Enable dex-preoptimization to speed up first boot sequence
