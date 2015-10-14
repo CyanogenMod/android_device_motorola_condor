@@ -59,6 +59,9 @@ on init
     chown root diag /sys/kernel/dropbox/event
     chown root diag /sys/kernel/dropbox/data
 
+    # Symbols required for motorola blobs
+    export LD_PRELOAD /system/lib/libmoto.so
+
 on fs
 
     mount_all fstab.qcom

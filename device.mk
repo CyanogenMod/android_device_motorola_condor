@@ -114,6 +114,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libxml2
 
+# Motorola
+PRODUCT_PACKAGES += \
+    libmoto
+
 # OMX
 PRODUCT_PACKAGES += \
     libdashplayer \
