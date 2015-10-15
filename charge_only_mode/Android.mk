@@ -15,7 +15,7 @@ LOCAL_SRC_FILES += \
 
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 
-LOCAL_STATIC_LIBRARIES := libunz libcutils libc liblog
+LOCAL_STATIC_LIBRARIES := libz libcutils libc liblog
 
 LOCAL_C_INCLUDES := external/zlib
 
