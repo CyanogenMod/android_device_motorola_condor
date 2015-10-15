@@ -151,13 +151,6 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
-# FM
-PRODUCT_PACKAGES += \
-    FM2 \
-    FMRecord \
-    libqcomfm_jni \
-    qcom.fmradio
-
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8610
@@ -194,10 +187,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     dhcpcd.conf
-
-# Doze
-PRODUCT_PACKAGES += \
-    MotoDoze
 
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
