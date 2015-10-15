@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -29,9 +29,16 @@
 #define LOG_NDDEBUG 0
 #define LOG_TAG "LocSvc_EngAdapter"
 
+#include <sys/stat.h>
+#include <errno.h>
+#include <ctype.h>
+#include <cutils/properties.h>
 #include <LocEngAdapter.h>
 #include "loc_eng_msg.h"
 #include "loc_log.h"
+
+#define CHIPSET_SERIAL_NUMBER_MAX_LEN 16
+#define USER_AGENT_MAX_LEN 512
 
 using namespace loc_core;
 
@@ -52,6 +59,151 @@ void LocInternalAdapter::stopFixInt() {
 void LocInternalAdapter::getZppInt() {
     sendMsg(new LocEngGetZpp(mLocEngAdapter));
 }
+
+LocEngAdapter::LocEngAdapter(LOC_API_ADAPTER_EVENT_MASK_T mask,
+                             void* owner, ContextBase* context,
+                             LocThread::tCreate tCreator) :
+    LocAdapterBase(mask,
+                   //Get the AFW context if VzW context has not already been intialized in
+                   //loc_ext
+                   context == NULL?
+                   LocDualContext::getLocFgContext(tCreator,
+                                                   NULL,
+                                                   LocDualContext::mLocationHalName,
+                                                   false)
+                   :context),
+    mOwner(owner), mInternalAdapter(new LocInternalAdapter(this)),
+    mUlp(new UlpProxyBase()), mNavigating(false),
+    mSupportsAgpsRequests(false),
+    mSupportsPositionInjection(false),
+    mSupportsTimeInjection(false),
+    mPowerVote(0)
+{
+    memset(&mFixCriteria, 0, sizeof(mFixCriteria));
+    mFixCriteria.mode = LOC_POSITION_MODE_INVALID;
+    LOC_LOGD("LocEngAdapter created");
+}
+
+inline
+LocEngAdapter::~LocEngAdapter()
+{
+    delete mInternalAdapter;
+    LOC_LOGV("LocEngAdapter deleted");
+}
+
+void LocEngAdapter::setXtraUserAgent() {
+    struct LocSetXtraUserAgent : public LocMsg {
+        const ContextBase* const mContext;
+        inline LocSetXtraUserAgent(ContextBase* context) :
+            LocMsg(), mContext(context) {
+        }
+        virtual void proc() const {
+            char release[PROPERTY_VALUE_MAX];
+            char manufacture[PROPERTY_VALUE_MAX];
+            char model[PROPERTY_VALUE_MAX];
+            char carrier[PROPERTY_VALUE_MAX];
+            char board[PROPERTY_VALUE_MAX];
+            char brand[PROPERTY_VALUE_MAX];
+            char chipsetsn[CHIPSET_SERIAL_NUMBER_MAX_LEN];
+            char userAgent[USER_AGENT_MAX_LEN];
+            const char defVal[] = "-";
+
+            property_get("ro.build.version.release", release,     defVal);
+            property_get("ro.product.manufacturer",  manufacture, defVal);
+            property_get("ro.product.model", model,   defVal);
+            property_get("ro.carrier",       carrier, defVal);
+            property_get("ro.product.board", board,   defVal);
+            property_get("ro.product.brand", brand,   defVal);
+            getChipsetSerialNo(chipsetsn, sizeof(chipsetsn), defVal);
+
+            snprintf(userAgent, sizeof(userAgent), "A/%s/%s/%s/%s/%s/QCX3/s%u/-/%s/-/%s/-/-/-",
+                     release, manufacture, model, board, carrier,
+                     mContext->getIzatDevId(), chipsetsn, brand);
+
+            for (int i = 0; i < sizeof(userAgent) && userAgent[i]; i++) {
+                if (' ' == userAgent[i]) userAgent[i] = '#';
+            }
+
+            saveUserAgentString(userAgent, strlen(userAgent));
+            LOC_LOGV("%s] UserAgent %s", __func__, userAgent);
+        }
+
+        void saveUserAgentString(const char* data, const int len) const {
+            const char XTRA_FOLDER[] = "/data/misc/location/xtra";
+            const char USER_AGENT_FILE[] = "/data/misc/location/xtra/useragent.txt";
+
+            if (data == NULL || len < 1) {
+                LOC_LOGE("%s:%d]: invalid input data = %p len = %d", __func__, __LINE__, data, len);
+                return;
+            }
+
+            struct stat s;
+            int err = stat(XTRA_FOLDER, &s);
+            if (err < 0) {
+                if (ENOENT == errno) {
+                    if (mkdir(XTRA_FOLDER, 0700) < 0) {
+                        LOC_LOGE("%s:%d]: make XTRA_FOLDER failed", __func__, __LINE__);
+                        return;
+                    }
+                } else {
+                    LOC_LOGE("%s:%d]: XTRA_FOLDER invalid", __func__, __LINE__);
+                    return;
+                }
+            }
+
+            FILE* file = fopen(USER_AGENT_FILE, "wt");
+            if (file == NULL) {
+                LOC_LOGE("%s:%d]: open USER_AGENT_FILE failed", __func__, __LINE__);
+                return;
+            }
+
+            size_t written = fwrite(data, 1, len, file);
+            fclose(file);
+            file = NULL;
+
+            // set file permission
+            chmod(USER_AGENT_FILE, 0600);
+
+            if (written != len) {
+                LOC_LOGE("%s:%d]: write USER_AGENT_FILE failed", __func__, __LINE__);
+            }
+        }
+
+        void getChipsetSerialNo(char buf[], int buflen, const char def[]) const {
+            const char SOC_SERIAL_NUMBER[] = "/sys/devices/soc0/serial_number";
+
+            FILE* file = fopen(SOC_SERIAL_NUMBER, "rt");
+            if (file == NULL) {
+                // use default upon unreadable file
+                strlcpy(buf, def, buflen);
+
+            } else {
+                size_t size = fread(buf, 1, buflen - 1, file);
+                if (size == 0) {
+                   // use default upon empty file
+                   strlcpy(buf, def, buflen);
+
+                } else {
+                   buf[size] = '\0';
+                }
+
+                fclose(file);
+
+                // remove trailing spaces
+                size_t len = strlen(buf);
+                while (--len >= 0 && isspace(buf[len])) {
+                    buf[len] = '\0';
+                }
+            }
+
+            return;
+        }
+
+    };
+
+    sendMsg(new LocSetXtraUserAgent(mContext));
+}
+
 void LocInternalAdapter::setUlpProxy(UlpProxyBase* ulp) {
     struct LocSetUlpProxy : public LocMsg {
         LocAdapterBase* mAdapter;
@@ -69,32 +221,6 @@ void LocInternalAdapter::setUlpProxy(UlpProxyBase* ulp) {
     sendMsg(new LocSetUlpProxy(mLocEngAdapter, ulp));
 }
 
-LocEngAdapter::LocEngAdapter(LOC_API_ADAPTER_EVENT_MASK_T mask,
-                             void* owner, ContextBase* context,
-                             MsgTask::tCreate tCreator) :
-    LocAdapterBase(mask,
-                   //Get the AFW context if VzW context has not already been intialized in
-                   //loc_ext
-                   context == NULL?
-                   LocDualContext::getLocFgContext(tCreator,
-                                                   LocDualContext::mLocationHalName)
-                   :context),
-    mOwner(owner), mInternalAdapter(new LocInternalAdapter(this)),
-    mUlp(new UlpProxyBase()), mNavigating(false),
-    mAgpsEnabled(false), mCPIEnabled(false)
-{
-    memset(&mFixCriteria, 0, sizeof(mFixCriteria));
-    mFixCriteria.mode = LOC_POSITION_MODE_INVALID;
-    LOC_LOGD("LocEngAdapter created");
-}
-
-inline
-LocEngAdapter::~LocEngAdapter()
-{
-    delete mInternalAdapter;
-    LOC_LOGV("LocEngAdapter deleted");
-}
-
 void LocEngAdapter::setUlpProxy(UlpProxyBase* ulp)
 {
     if (ulp == mUlp) {
@@ -102,17 +228,62 @@ void LocEngAdapter::setUlpProxy(UlpProxyBase* ulp)
         //and we get the same object back for UlpProxyBase . Do nothing
         return;
     }
-    delete mUlp;
+
     LOC_LOGV("%s] %p", __func__, ulp);
     if (NULL == ulp) {
+        LOC_LOGE("%s:%d]: ulp pointer is NULL", __func__, __LINE__);
         ulp = new UlpProxyBase();
     }
-    mUlp = ulp;
 
-    if (LOC_POSITION_MODE_INVALID != mFixCriteria.mode) {
+    if (LOC_POSITION_MODE_INVALID != mUlp->mPosMode.mode) {
         // need to send this mode and start msg to ULP
-        mUlp->sendFixMode(mFixCriteria);
-        mUlp->sendStartFix();
+        ulp->sendFixMode(mUlp->mPosMode);
+    }
+
+    if(mUlp->mFixSet) {
+        ulp->sendStartFix();
+    }
+
+    delete mUlp;
+    mUlp = ulp;
+}
+
+int LocEngAdapter::setGpsLockMsg(LOC_GPS_LOCK_MASK lockMask)
+{
+    struct LocEngAdapterGpsLock : public LocMsg {
+        LocEngAdapter* mAdapter;
+        LOC_GPS_LOCK_MASK mLockMask;
+        inline LocEngAdapterGpsLock(LocEngAdapter* adapter, LOC_GPS_LOCK_MASK lockMask) :
+            LocMsg(), mAdapter(adapter), mLockMask(lockMask)
+        {
+            locallog();
+        }
+        inline virtual void proc() const {
+            mAdapter->setGpsLock(mLockMask);
+        }
+        inline  void locallog() const {
+            LOC_LOGV("LocEngAdapterGpsLock - mLockMask: %x", mLockMask);
+        }
+        inline virtual void log() const {
+            locallog();
+        }
+    };
+    sendMsg(new LocEngAdapterGpsLock(this, lockMask));
+    return 0;
+}
+
+void LocEngAdapter::requestPowerVote()
+{
+    if (getPowerVoteRight()) {
+        /* Power voting without engine lock:
+         * 101: vote down, 102-104 - vote up
+         * These codes are used not to confuse with actual engine lock
+         * functionality, that can't be used in SSR scenario, as it
+         * conflicts with initialization sequence.
+         */
+        bool powerUp = getPowerVote();
+        LOC_LOGV("LocEngAdapterVotePower - Vote Power: %d", (int)powerUp);
+        setGpsLock(powerUp ? 103 : 101);
     }
 }
 
@@ -150,14 +321,14 @@ void LocEngAdapter::reportPosition(UlpLocation &location,
     }
 }
 
-void LocInternalAdapter::reportSv(GpsSvStatus &svStatus,
+void LocInternalAdapter::reportSv(GnssSvStatus &svStatus,
                                   GpsLocationExtended &locationExtended,
                                   void* svExt){
     sendMsg(new LocEngReportSv(mLocEngAdapter, svStatus,
                                locationExtended, svExt));
 }
 
-void LocEngAdapter::reportSv(GpsSvStatus &svStatus,
+void LocEngAdapter::reportSv(GnssSvStatus &svStatus,
                              GpsLocationExtended &locationExtended,
                              void* svExt)
 {
@@ -203,84 +374,84 @@ bool LocEngAdapter::reportXtraServer(const char* url1,
                                         const char* url3,
                                         const int maxlength)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngReportXtraServer(mOwner, url1,
                                            url2, url3, maxlength));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestATL(int connHandle, AGpsType agps_type)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngRequestATL(mOwner,
                                      connHandle, agps_type));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::releaseATL(int connHandle)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngReleaseATL(mOwner, connHandle));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestXtraData()
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngRequestXtra(mOwner));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestTime()
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngRequestTime(mOwner));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestNiNotify(GpsNiNotification &notif, const void* data)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         notif.size = sizeof(notif);
         notif.timeout = LOC_NI_NO_RESPONSE_TIME;
 
         sendMsg(new LocEngRequestNi(mOwner, notif, data));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestSuplES(int connHandle)
 {
-    if (mAgpsEnabled)
+    if (mSupportsAgpsRequests)
         sendMsg(new LocEngRequestSuplEs(mOwner, connHandle));
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::reportDataCallOpened()
 {
-    if(mAgpsEnabled)
+    if(mSupportsAgpsRequests)
         sendMsg(new LocEngSuplEsOpened(mOwner));
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::reportDataCallClosed()
 {
-    if(mAgpsEnabled)
+    if(mSupportsAgpsRequests)
         sendMsg(new LocEngSuplEsClosed(mOwner));
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
@@ -295,3 +466,79 @@ void LocEngAdapter::handleEngineUpEvent()
     sendMsg(new LocEngUp(mOwner));
 }
 
+enum loc_api_adapter_err LocEngAdapter::setTime(GpsUtcTime time,
+                                                int64_t timeReference,
+                                                int uncertainty)
+{
+    loc_api_adapter_err result = LOC_API_ADAPTER_ERR_SUCCESS;
+
+    LOC_LOGD("%s:%d]: mSupportsTimeInjection is %d",
+             __func__, __LINE__, mSupportsTimeInjection);
+
+    if (mSupportsTimeInjection) {
+        LOC_LOGD("%s:%d]: Injecting time", __func__, __LINE__);
+        result = mLocApi->setTime(time, timeReference, uncertainty);
+    } else {
+        mSupportsTimeInjection = true;
+    }
+    return result;
+}
+
+enum loc_api_adapter_err LocEngAdapter::setXtraVersionCheck(int check)
+{
+    enum loc_api_adapter_err ret;
+    ENTRY_LOG();
+    enum xtra_version_check eCheck;
+    switch (check) {
+    case 0:
+        eCheck = DISABLED;
+        break;
+    case 1:
+        eCheck = AUTO;
+        break;
+    case 2:
+        eCheck = XTRA2;
+        break;
+    case 3:
+        eCheck = XTRA3;
+        break;
+    default:
+        eCheck = DISABLED;
+    }
+    ret = mLocApi->setXtraVersionCheck(eCheck);
+    EXIT_LOG(%d, ret);
+    return ret;
+}
+
+void LocEngAdapter::reportGpsMeasurementData(GpsData &gpsMeasurementData)
+{
+    sendMsg(new LocEngReportGpsMeasurement(mOwner,
+                                           gpsMeasurementData));
+}
+
+/*
+  Update Registration Mask
+ */
+void LocEngAdapter::updateRegistrationMask(LOC_API_ADAPTER_EVENT_MASK_T event,
+                                           loc_registration_mask_status isEnabled)
+{
+    LOC_LOGD("entering %s", __func__);
+    int result = LOC_API_ADAPTER_ERR_FAILURE;
+    result = mLocApi->updateRegistrationMask(event, isEnabled);
+    if (result == LOC_API_ADAPTER_ERR_SUCCESS) {
+        LOC_LOGD("%s] update registration mask succeed.", __func__);
+    } else {
+        LOC_LOGE("%s] update registration mask failed.", __func__);
+    }
+}
+
+/*
+  Set Gnss Constellation Config
+ */
+bool LocEngAdapter::gnssConstellationConfig()
+{
+    LOC_LOGD("entering %s", __func__);
+    bool result = false;
+    result = mLocApi->gnssConstellationConfig();
+    return result;
+}

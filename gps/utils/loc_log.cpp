@@ -51,6 +51,7 @@ const char FROM_MODEM[] = "<---";
 const char TO_AFW[]     = "<===";
 const char EXIT_TAG[]   = "Exiting";
 const char ENTRY_TAG[]  = "Entering";
+const char EXIT_ERROR_TAG[]  = "Exiting with error";
 
 /* Logging Mechanism */
 loc_logger_s_type loc_logger;
@@ -113,6 +114,7 @@ loc_name_val_s_type target_name[] =
     NAME_VAL(GNSS_GSS),
     NAME_VAL(GNSS_MDM),
     NAME_VAL(GNSS_QCA1530),
+    NAME_VAL(GNSS_AUTO),
     NAME_VAL(GNSS_UNKNOWN)
 };
 
@@ -200,6 +202,12 @@ SIDE EFFECTS
 void loc_logger_init(unsigned long debug, unsigned long timestamp)
 {
    loc_logger.DEBUG_LEVEL = debug;
+#ifdef TARGET_BUILD_VARIANT_USER
+   // force user builds to 2 or less
+   if (loc_logger.DEBUG_LEVEL > 2) {
+       loc_logger.DEBUG_LEVEL = 2;
+   }
+#endif
    loc_logger.TIMESTAMP   = timestamp;
 }
 
