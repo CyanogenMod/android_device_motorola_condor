@@ -119,7 +119,11 @@ PRODUCT_PACKAGES += \
     libdashplayer \
     libOmxCore \
     libOmxVenc \
-    libstagefrighthw
+    libstagefrighthw \
+    qcmediaplayer
+
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
 
 PRODUCT_PACKAGES += \
     wlan_module_symlink \
