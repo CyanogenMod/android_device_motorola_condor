@@ -1,5 +1,8 @@
 allow mm-qcamerad qdsp_device:chr_file { open read ioctl };
 allow mm-qcamerad system_server:unix_stream_socket { read write };
+allow mm-qcamerad debug_prop:property_service set;
+allow mm-qcamerad property_socket:sock_file write;
+allow mm-qcamerad init:unix_stream_socket connectto;
 allow servicemanager mm-qcamerad:dir search;
 allow servicemanager mm-qcamerad:file { open read };
 allow servicemanager mm-qcamerad:process { getattr };
