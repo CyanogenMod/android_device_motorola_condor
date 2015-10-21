@@ -103,9 +103,6 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
 
-# Encryption
-TARGET_HW_DISK_ENCRYPTION := true
-
 # Hardware tunables framework
 BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
 
