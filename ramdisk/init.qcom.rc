@@ -60,7 +60,7 @@ on init
     chown root diag /sys/kernel/dropbox/data
 
     # Symbols required for motorola blobs
-    export LD_PRELOAD /system/lib/libmoto.so
+    export LD_PRELOAD "/system/lib/libmoto.so /system/lib/libboringssl-compat.so"
 
 on fs
 

@@ -98,6 +98,10 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing
 
+# Camera
+PRODUCT_PACKAGES += \
+    libboringssl-compat
+
 # Filesystem
 PRODUCT_PACKAGES += \
     setup_fs
