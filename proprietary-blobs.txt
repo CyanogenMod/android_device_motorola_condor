@@ -99,7 +99,6 @@ vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 bin/mm-pp-daemon
 lib/libadropbox.so
-lib/libqsap_sdk.so
 bin/dropboxd
 bin/subsystem_ramdump
 lib/libcnefeatureconfig.so
