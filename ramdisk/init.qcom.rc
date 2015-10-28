@@ -56,8 +56,8 @@ on init
     write /proc/self/coredump_filter "0x7f"
 
     # Setup kernel dropbox permissions so that dropboxd can utilize it
-    chown root diag /sys/kernel/dropbox/event
-    chown root diag /sys/kernel/dropbox/data
+    chown root qcom_diag /sys/kernel/dropbox/event
+    chown root qcom_diag /sys/kernel/dropbox/data
 
     # Symbols required for motorola blobs
     export LD_PRELOAD "/system/lib/libmoto.so /system/lib/libboringssl-compat.so"
@@ -173,7 +173,7 @@ on post-fs-data
     mkdir /data/diag_mdlog/logs 0750 log log
 
     # Setup folder for native to transfer data to NativeDropBoxAgent
-    mkdir /data/system/dropbox-add 0730 system diag
+    mkdir /data/system/dropbox-add 0730 system qcom_diag
 
     # Set correct permissions for UTAGS
     exec /system/bin/chown -L mot_tcmd:system /dev/block/platform/msm_sdcc.1/by-name/utags
@@ -516,14 +516,14 @@ service_redefine ril-daemon /system/bin/rild
     socket rild-debug stream 660 radio system
     socket cutback stream 660 media radio
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw
 
 service ril-daemon1 /system/bin/rild -c 2
     class main
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw
     disabled
 
 service mmi-touch-sh /system/bin/sh /init.mmi.touch.sh synaptics aps
