@@ -127,6 +127,7 @@ PRODUCT_PACKAGES += \
     libdashplayer \
     libextmedia_jni \
     libOmxCore \
+	libOmxVdec \
     libOmxVenc \
     libOmxVidcCommon \
     libqcmediaplayer \
