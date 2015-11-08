@@ -65,6 +65,7 @@ persist.gralloc.cp.level3=1
 # system props for the data modules
 #
 ro.use_data_netmgrd=true
+persist.data.qmi.adb_logmask=0
 
 #system props for time-services
 persist.timed.enable=true
