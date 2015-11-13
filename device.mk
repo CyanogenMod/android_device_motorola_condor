@@ -199,6 +199,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_factory_nv.bin
 
+# MultiWindow ;p
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.debug.multi_window=true
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
 
