@@ -100,7 +100,8 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    libboringssl-compat
+    libboringssl-compat \
+    libshim_qcopt
 
 # Filesystem
 PRODUCT_PACKAGES += \
