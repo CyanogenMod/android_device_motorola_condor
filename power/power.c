@@ -18,9 +18,14 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
+#include <stdbool.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include <utils/Log.h>
 
@@ -68,6 +73,15 @@ static int sysfs_write_int(char *path, int value)
     return sysfs_write_str(path, buf);
 }
 
+static bool check_governor(void)
+{
+    struct stat s;
+    int err = stat(INTERACTIVE_PATH, &s);
+    if (err != 0) return false;
+    if (S_ISDIR(s.st_mode)) return true;
+    return false;
+}
+
 static int is_profile_valid(int profile)
 {
     return profile >= 0 && profile < PROFILE_MAX;
@@ -96,6 +110,9 @@ static void power_set_interactive(__attribute__((unused)) struct power_module *m
         return;
     }
 
+    // break out early if governor is not interactive
+    if (!check_governor()) return;
+
     if (on) {
         sysfs_write_int(INTERACTIVE_PATH "hispeed_freq",
                         profiles[current_power_profile].hispeed_freq);
@@ -119,6 +136,9 @@ static void set_power_profile(int profile)
         ALOGE("%s: unknown profile: %d", __func__, profile);
         return;
     }
+
+    // break out early if governor is not interactive
+    if (!check_governor()) return;
 
     if (profile == current_power_profile)
         return;
@@ -162,6 +182,9 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
 
         if (!profiles[current_power_profile].boostpulse_duration)
             return;
+
+        // break out early if governor is not interactive
+        if (!check_governor()) return;
 
         if (boostpulse_open() >= 0) {
             snprintf(buf, sizeof(buf), "%d", 1);
