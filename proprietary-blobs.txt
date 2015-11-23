@@ -214,8 +214,6 @@ bin/dbvc_atvc_property_set
 bin/ptt_socket_app
 bin/ATFWD-daemon
 bin/mbm_spy
-bin/fmconfig
-bin/fm_qsoc_patches
 bin/rild
 vendor/lib/libacdbloader.so
 vendor/lib/libaudcal.so
