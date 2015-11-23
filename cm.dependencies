@@ -8,10 +8,6 @@
     "target_path": "external/sony/boringssl-compat"
   },
   {
-    "repository": "android_hardware_qcom_fm",
-    "target_path": "hardware/qcom/fm"
-  },
-  {
     "repository": "android_kernel_motorola_msm8610",
     "target_path": "kernel/motorola/msm8610"
   },
