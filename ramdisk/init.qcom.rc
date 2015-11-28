@@ -212,6 +212,7 @@ on post-fs-data
     chown mot_pwric mot_pwric /sys/module/qpnp_charger/parameters/chrg_timestamp
 
     start batt_health
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -456,6 +457,11 @@ service audiod /system/bin/audiod
 service batt_health /system/bin/batt_health
     class main
     group mot_pwric
+    disabled
+
+service charge_only_mode /system/bin/charge_only_mode
+    user root
+    group graphics system input
     disabled
 
 service hw_revs /system/bin/hardware_revisions.sh
