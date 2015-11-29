@@ -25,6 +25,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <zlib.h>
 #define LOG_TAG "CHARGE_ONLY_MODE"
 #include <cutils/log.h>
@@ -327,8 +328,8 @@ void draw(int w, int h, unsigned short *color_channel, int percent, int error)
 
 	memset(color_channel, 0, fb_size);
 	blit(color_channel, &battery_charge_background,
-				(fb_width - battery_charge_background.w) / 2,
-				(fb_height- battery_charge_background.h) / 2);
+			(fb_width - battery_charge_background.w) / 2,
+			(fb_height- battery_charge_background.h) / 2);
 
 	/* Fill it up! */
 	if (!error) {

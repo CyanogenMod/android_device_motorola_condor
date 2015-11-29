@@ -49,7 +49,7 @@ void alarm_process(void)
 	while ((a = alarms) != NULL) {
 		if (now.tv_sec < a->alarm_time.tv_sec)
 			break;
-		if (	(now.tv_sec == a->alarm_time.tv_sec)  &&
+		if ((now.tv_sec == a->alarm_time.tv_sec)  &&
 				(now.tv_usec < a->alarm_time.tv_usec))
 			break;
 		alarms = a->next;

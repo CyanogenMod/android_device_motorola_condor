@@ -54,45 +54,45 @@ static enum { EV_TYPE_UNKNOWN, EV_TYPE_KEYBOARD, EV_TYPE_UEVENT } ev_type[MAX_DE
 
 #define EV_KEY_VALUE_DOWN 0x01
 #define EV_KEY_VALUE_UP 0x00
-#define CHARGER_DRIVER "pm8921-charger"
+#define CHARGER_DRIVER "power_supply"
 
 struct uevent {
-    const char *action;
-    const char *path;
-    const char *subsystem;
-    const char *firmware;
-    int major;
-    int minor;
+	const char *action;
+	const char *path;
+	const char *subsystem;
+	const char *firmware;
+	int major;
+	int minor;
 };
 
 static int open_uevent_socket(void)
 {
-    struct sockaddr_nl addr;
-    int sz = 64*1024;
-    int s;
+	struct sockaddr_nl addr;
+	int sz = 64*1024;
+	int s;
 
-    memset(&addr, 0, sizeof(addr));
-    addr.nl_family = AF_NETLINK;
-    addr.nl_pid = getpid();
-    addr.nl_groups = 0xffffffff;
+	memset(&addr, 0, sizeof(addr));
+	addr.nl_family = AF_NETLINK;
+	addr.nl_pid = getpid();
+	addr.nl_groups = 0xffffffff;
 
-    s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);
-    if(s < 0)
-        return -1;
+	s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);
+	if(s < 0)
+		return -1;
 
-    setsockopt(s, SOL_SOCKET, SO_RCVBUFFORCE, &sz, sizeof(sz));
+	setsockopt(s, SOL_SOCKET, SO_RCVBUFFORCE, &sz, sizeof(sz));
 
-    if(bind(s, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
-        close(s);
-        return -1;
-    }
+	if(bind(s, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
+		close(s);
+		return -1;
+	}
 
-    return s;
+	return s;
 }
 
 int ev_init(void)
 {
-    int fd;
+	int fd;
 
 	int i;
 	for (i=0;;i++) {
@@ -118,19 +118,19 @@ int ev_init(void)
 		ev_count++;
 	}
 
-    return 0;
+	return 0;
 }
 
 void ev_exit(void)
 {
-    while (ev_count-- > 0) {
-        close(ev_fds[ev_count].fd);
-    }
+	while (ev_count-- > 0) {
+		close(ev_fds[ev_count].fd);
+	}
 }
 
 int ev_get(int timeout_ms)
 {
-    int r, i;
+	int r, i;
 
 	r = poll(ev_fds, ev_count, timeout_ms);
 	if (r <= 0)
@@ -145,7 +145,6 @@ int ev_get(int timeout_ms)
 			r = read(ev_fds[i].fd, &ev, sizeof(ev));
 			fprintf(stderr, "keyboard event: (%x,%x,%x)\n", ev.type, ev.code, ev.value);
 			if(r == sizeof(ev)) {
-
 				/* POWER key */
 				if ((ev.type == EV_KEY) && (ev.code == EV_POWER_KEY_CODE) && (ev.value == EV_KEY_VALUE_DOWN))
 					return EVENT_POWER_KEY_DOWN;
@@ -173,7 +172,6 @@ int ev_get(int timeout_ms)
 				return -1;
 			}
 		} else if (ev_type[i] == EV_TYPE_UEVENT) {
-
 			char msg[1024];
 			while ((r = recv(ev_fds[i].fd, msg, sizeof(msg), 0)) > 0)
 				;
@@ -181,38 +179,33 @@ int ev_get(int timeout_ms)
 			{
 				ALOGD("pm8921_battery UEVENT msg : %s\n", msg);
 				return EVENT_BATTERY;
-
 			}
-
 		}
 	}
 
-    return -1;
+	return -1;
 }
 
 int uev_get(int timeout_ms)
 {
-    int r;
+	int r;
 
-        r = poll((struct pollfd*)&ev_fds[uev_count], 1, timeout_ms);
-        if (r <= 0)
-                return -1;
+	r = poll((struct pollfd*)&ev_fds[uev_count], 1, timeout_ms);
+	if (r <= 0)
+		return -1;
 
-        if ((ev_fds[uev_count].revents & POLLIN) == 0)
-                return -1;
+	if ((ev_fds[uev_count].revents & POLLIN) == 0)
+		return -1;
 
-        if (ev_type[uev_count] == EV_TYPE_UEVENT) {
+	if (ev_type[uev_count] == EV_TYPE_UEVENT) {
+		char msg[1024];
+		while ((r = recv(ev_fds[uev_count].fd, msg, sizeof(msg), 0)) > 0);
+		if(strstr(msg, CHARGER_DRIVER))
+		{
+			ALOGD("pm8921_battery uev_get UEVENT msg : %s\n", msg);
+			return EVENT_BATTERY;
+		}
+	}
 
-                char msg[1024];
-                while ((r = recv(ev_fds[uev_count].fd, msg, sizeof(msg), 0)) > 0)
-					;
-                if(strstr(msg, CHARGER_DRIVER))
-                {
-                       ALOGD("pm8921_battery uev_get UEVENT msg : %s\n", msg);
-                       return EVENT_BATTERY;
-
-                }
-        }
-
-    return -1;
+	return -1;
 }
