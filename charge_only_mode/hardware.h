@@ -41,6 +41,5 @@ int boot_reason_charge_only();
 void get_device_state(struct device_state *s);
 void set_battery_led(struct device_state *s);
 void set_brightness(float percent);
-void set_button_brightness(float percent);
 
 #endif

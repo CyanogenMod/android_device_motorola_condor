@@ -63,7 +63,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LED_ON_THRESHOLD 90
 
 static int ac_online = 0;
-static int max_brightness = 0;
 
 static int sys_get_int_parameter(const char *path, int missing_value)
 {
@@ -98,9 +97,9 @@ int is_plugged_into_ac()
 {
 	ac_online = (access("/sys/class/power_supply/ac/online", R_OK) == 0);
 	if (ac_online) {
-	    return sys_get_int_parameter("/sys/class/power_supply/ac/online", 0);
+		return sys_get_int_parameter("/sys/class/power_supply/ac/online", 0);
 	} else {
-	    return sys_get_int_parameter("/sys/class/power_supply/pm8921-dc/online", 0);
+		return sys_get_int_parameter("/sys/class/power_supply/pm8921-dc/online", 0);
 	}
 }
 
@@ -117,7 +116,8 @@ int is_battery_present()
 int is_charging()
 {
 	char status[128];
-	if (sys_get_string_parameter("/sys/class/power_supply/battery/status", status, sizeof(status)) < 0)
+	if (sys_get_string_parameter("/sys/class/power_supply/battery/status",
+			status, sizeof(status)) < 0)
 		return 0;
 	return (strncmp(status, "Charging", 8) == 0)? 1 : 0;
 
@@ -126,16 +126,17 @@ int is_charging()
 int is_discharging()
 {
 	char status[128];
-	if (sys_get_string_parameter("/sys/class/power_supply/battery/status", status, sizeof(status)) < 0)
+	if (sys_get_string_parameter("/sys/class/power_supply/battery/status",
+			status, sizeof(status)) < 0)
 		return 0;
 	return (strncmp(status, "Discharging", 11) == 0)? 1 : 0;
-
 }
 
 int is_unknown()
 {
 	char status[128];
-	if (sys_get_string_parameter("/sys/class/power_supply/battery/status", status, sizeof(status)) < 0)
+	if (sys_get_string_parameter("/sys/class/power_supply/battery/status",
+			status, sizeof(status)) < 0)
 		return 0;
 	return (strncmp(status, "Unknown", 7) == 0) ? 1 : 0;
 }
@@ -168,70 +169,70 @@ const char* const BLINK_ENABLE_FILE = "/sys/class/leds/red/blink";
 
 static int write_string(const char* file, const char* string, int len)
 {
-    int fd;
-    ssize_t amt;
+	int fd;
+	ssize_t amt;
 
-    fd = open(file, O_RDWR);
-    if (fd < 0) {
-        ALOGD("%s open failed: %d\n", file, errno);
-        return errno;
-    }
+	fd = open(file, O_RDWR);
+	if (fd < 0) {
+		ALOGD("%s open failed: %d\n", file, errno);
+		return errno;
+	}
 
-    amt = write(fd, string, len);
-    if (amt < 0) {
-        ALOGD("%s write failed: %d\n", file, errno);
-    }
+	amt = write(fd, string, len);
+	if (amt < 0) {
+		ALOGD("%s write failed: %d\n", file, errno);
+	}
 
-    close(fd);
-    return amt >= 0 ? 0 : errno;
+	close(fd);
+	return amt >= 0 ? 0 : errno;
 }
 
 static int __set_led_state(unsigned color, int on, int off)
 {
-    int len;
-    char buf[30];
-    int alpha, red, green;
-    int blink;
+	int len;
+	char buf[30];
+	int alpha, red, green;
+	int blink;
 
-    ALOGD("set_led_state color=%08X, on=%d, off=%d\n", color, on, off);
+	ALOGD("set_led_state color=%08X, on=%d, off=%d\n", color, on, off);
 
-    /* alpha of 0 or color of 0 means off*/
-    if ((color & 0xff000000) == 0 || (color & 0x00ffffff) == 0) {
-        on = 0;
-        off = 0;
-    }
+	/* alpha of 0 or color of 0 means off*/
+	if ((color & 0xff000000) == 0 || (color & 0x00ffffff) == 0) {
+		on = 0;
+		off = 0;
+	}
 
 
-    if (on > 0 && off > 0)
-    {
-        blink = 1;
-        /* set lights and then set blink - on */
-        red = (color >> 16) & 0xFF;
-        green = (color >> 8) & 0xFF;
+	if (on > 0 && off > 0)
+	{
+		blink = 1;
+		/* set lights and then set blink - on */
+		red = (color >> 16) & 0xFF;
+		green = (color >> 8) & 0xFF;
 
-        len = sprintf(buf, "%d", red);
-        write_string(RED_BRIGHTNESS_FILE, buf, len);
-        len = sprintf(buf, "%d", green);
-        write_string(GREEN_BRIGHTNESS_FILE, buf, len);
+		len = sprintf(buf, "%d", red);
+		write_string(RED_BRIGHTNESS_FILE, buf, len);
+		len = sprintf(buf, "%d", green);
+		write_string(GREEN_BRIGHTNESS_FILE, buf, len);
 
-        len = sprintf(buf, "%d", blink);
-        write_string(BLINK_ENABLE_FILE, buf, len);
-    }
-    else
-    {
-        blink = 0;
-        /* set blink and then set light - off */
-        len = sprintf(buf, "%d", blink);
-        write_string(BLINK_ENABLE_FILE, buf, len);
+		len = sprintf(buf, "%d", blink);
+		write_string(BLINK_ENABLE_FILE, buf, len);
+	}
+	else
+	{
+		blink = 0;
+		/* set blink and then set light - off */
+		len = sprintf(buf, "%d", blink);
+		write_string(BLINK_ENABLE_FILE, buf, len);
 
-        red = (color >> 16) & 0xFF;
-        green = (color >> 8) & 0xFF;
+		red = (color >> 16) & 0xFF;
+		green = (color >> 8) & 0xFF;
 
-	len = sprintf(buf, "%d", red);
-        write_string(RED_BRIGHTNESS_FILE, buf, len);
-        len = sprintf(buf, "%d", green);
-        write_string(GREEN_BRIGHTNESS_FILE, buf, len);
-    }
+		len = sprintf(buf, "%d", red);
+		write_string(RED_BRIGHTNESS_FILE, buf, len);
+		len = sprintf(buf, "%d", green);
+		write_string(GREEN_BRIGHTNESS_FILE, buf, len);
+	}
 
 	return 0;
 }
@@ -252,34 +253,10 @@ void set_brightness(float percent)
 	int fd, n;
 	char b[20];
 
-        ALOGD("set_brightness: %f\n", percent);
-	fd = open("/sys/class/backlight/lcd-backlight/brightness", O_RDWR);
-	max_brightness = sys_get_int_parameter("/sys/class/backlight/lcd-backlight/max_brightness", 0);
-	if (fd < 0) {
-		fd = open("/sys/class/backlight/lm3532_bl/brightness", O_RDWR);
-		max_brightness = sys_get_int_parameter("/sys/class/backlight/lm3532_bl/max_brightness", 0);
-		if (fd < 0) {
-			fd = open("/sys/class/leds/lcd-backlight/brightness", O_RDWR);
-			max_brightness = sys_get_int_parameter("/sys/class/leds/lcd-backlight/max_brightness", 0);
-			if (fd < 0)
-			return;
-		}
-	}
-	n = sprintf(b, "%d\n", (int)(max_brightness*percent));
-	write(fd, b, n);
-	close(fd);
-}
-
-void set_button_brightness(float percent)
-{
-	int fd, n;
-	char b[20];
-
-        ALOGD("set_button_brightness: %f\n", percent);
-	fd = open("/sys/class/leds/button-backlight/brightness", O_RDWR);
-	if (fd < 0)
-		return;
-	n = sprintf(b, "%d\n", (int)(126*percent));
+	ALOGD("set_brightness: %f\n", percent);
+	fd = open("/sys/class/leds/lcd-backlight/brightness", O_RDWR);
+	if (fd < 0) return;
+	n = sprintf(b, "%d\n", (int)(255*percent));
 	write(fd, b, n);
 	close(fd);
 }

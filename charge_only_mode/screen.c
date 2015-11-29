@@ -24,6 +24,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
@@ -41,11 +42,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 struct FB {
-    unsigned short *bits;
-    unsigned size;
-    int fd;
-    struct fb_fix_screeninfo fi;
-    struct fb_var_screeninfo vi;
+	unsigned short *bits;
+	unsigned size;
+	int fd;
+	struct fb_fix_screeninfo fi;
+	struct fb_var_screeninfo vi;
 };
 
 #define fb_height(fb) ((fb)->vi.yres)
@@ -71,35 +72,35 @@ static int fb_open(struct FB *fb)
 	/* Switch to graphics mode */
 	vt_set_mode(1);
 
-    	fb->fd = open("/dev/graphics/fb0", O_RDWR);
-    	if (fb->fd < 0)
-    	{
+	fb->fd = open("/dev/graphics/fb0", O_RDWR);
+	if (fb->fd < 0)
+	{
 		ALOGD("fb open failed!\n");
-        	return -1;
-    	}
-    	if (ioctl(fb->fd, FBIOGET_FSCREENINFO, &fb->fi) < 0)
-    	{
+		return -1;
+	}
+	if (ioctl(fb->fd, FBIOGET_FSCREENINFO, &fb->fi) < 0)
+	{
 		ALOGD("fb ioctl FBIOGET_FSCREENINFO failed \n");
-        	goto err1;
-    	}
-    	if (ioctl(fb->fd, FBIOGET_VSCREENINFO, &fb->vi) < 0)
-    	{
+		goto err1;
+	}
+	if (ioctl(fb->fd, FBIOGET_VSCREENINFO, &fb->vi) < 0)
+	{
 		ALOGD("fb ioctl FBIOGET_VSCREENINFO failed \n");
-        	goto err1;
-    	}
+		goto err1;
+	}
 
 	fb->bits = mmap(0, fb->fi.smem_len, PROT_READ | PROT_WRITE,
 					MAP_SHARED, fb->fd, 0);
 	if (fb->bits == MAP_FAILED)
 	{
 		ALOGD("fb mapping failed!\n");
-        	goto err1;
+		goto err1;
 	}
 	return 0;
 
 err1:
-    	close(fb->fd);
-    	return -1;
+	close(fb->fd);
+	return -1;
 }
 
 static void fb_close(struct FB *fb)
@@ -131,22 +132,22 @@ err1:
 
 void flip_32(unsigned *bits, unsigned short *ptr, unsigned count)
 {
-    unsigned i=0;
-    while (i<count) {
-        uint32_t rgb32, red, green, blue, alpha;
-        /* convert 16 bits to 32 bits */
-        rgb32 = ((ptr[i] >> 11) & 0x1F);
-        red = (rgb32 << 3) | (rgb32 >> 2);
-        rgb32 = ((ptr[i] >> 5) & 0x3F);
-        green = (rgb32 << 2) | (rgb32 >> 4);
-        rgb32 = ((ptr[i]) & 0x1F);
-        blue = (rgb32 << 3) | (rgb32 >> 2);
-        alpha = 0xff;
-        rgb32 = (alpha << 24) | (red << 16) | (green << 8) | (blue);
-        android_memset32((uint32_t *)bits, rgb32, 4);
-        i++;
-        bits++;
-    }
+	unsigned i=0;
+	while (i<count) {
+		uint32_t rgb32, red, green, blue, alpha;
+		/* convert 16 bits to 32 bits */
+		rgb32 = ((ptr[i] >> 11) & 0x1F);
+		red = (rgb32 << 3) | (rgb32 >> 2);
+		rgb32 = ((ptr[i] >> 5) & 0x3F);
+		green = (rgb32 << 2) | (rgb32 >> 4);
+		rgb32 = ((ptr[i]) & 0x1F);
+		blue = (rgb32 << 3) | (rgb32 >> 2);
+		alpha = 0xff;
+		rgb32 = (alpha << 24) | (red << 16) | (green << 8) | (blue);
+		android_memset32((uint32_t *)bits, rgb32, 4);
+		i++;
+		bits++;
+	}
 }
 
 int screen_update(int percentage, int error)
@@ -156,7 +157,7 @@ int screen_update(int percentage, int error)
 	draw(fb_width(fb), fb_height(fb), mem_surface,
 			percentage, error);
 
-	if( fb->vi.bits_per_pixel == 16) {
+	if (fb->vi.bits_per_pixel == 16) {
 		memcpy(fb->bits + fb->vi.yoffset * fb_width(fb), \
 		mem_surface, fb->fi.line_length * fb->vi.yres);
 	} else {
@@ -213,7 +214,7 @@ static int show_565rle(const char *fn)
 			fb_width(fb) * fb_height(fb) * 2);
 
 	fb->vi.yres_virtual = fb->vi.yres * 2;
-	fb->vi.yoffset = fb->vi.yoffset ? 0 : fb->vi.yres;	/* force a flip */
+	fb->vi.yoffset = fb->vi.yoffset ? 0 : fb->vi.yres; /* force a flip */
 	fb->vi.bits_per_pixel = 16;
 	ioctl(fb->fd, FBIOPUT_VSCREENINFO, &fb->vi);
 
@@ -236,14 +237,14 @@ void screen_uninit(void)
 
 void display_blank(void)
 {
-       if (ioctl(fb->fd, FBIOBLANK, VESA_POWERDOWN) < 0)
-               ALOGD("display blank failed, fb.fd %d\n", fb->fd);
+	if (ioctl(fb->fd, FBIOBLANK, VESA_POWERDOWN) < 0)
+		ALOGD("display blank failed, fb.fd %d\n", fb->fd);
 	blank = 1;
 }
 
 void display_unblank(void)
 {
-       if (ioctl(fb->fd, FBIOBLANK, VESA_NO_BLANKING) < 0)
-               ALOGD("display unblank failed, fb.fd %d\n", fb->fd);
+	if (ioctl(fb->fd, FBIOBLANK, VESA_NO_BLANKING) < 0)
+		ALOGD("display unblank failed, fb.fd %d\n", fb->fd);
 	blank = 0;
 }
