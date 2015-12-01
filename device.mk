@@ -179,25 +179,24 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    p2p_supplicant_overlay.conf \
-    wpa_supplicant_overlay.conf
-
-# Wifi
-PRODUCT_PACKAGES += \
-    hostapd.accept \
     hostapd_default.conf \
+    hostapd.accept \
     hostapd.deny \
     hostapd \
     wpa_supplicant \
+    wpa_supplicant_overlay.conf \
+    p2p_supplicant_overlay.conf \
+    dhcpcd.conf \
     wpa_supplicant.conf \
-    dhcpcd.conf
+    wlan_module_symlink \
+    wlan_persist_symlink \
+    wcnss_service \
+    libQWiFiSoftApCfg \
+    libqsap_sdk
 
 # Doze
 PRODUCT_PACKAGES += \
     MotoDoze
-
-PRODUCT_PACKAGES += \
-    WCNSS_qcom_wlan_factory_nv.bin
 
 # MultiWindow ;p
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
