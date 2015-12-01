@@ -32,10 +32,6 @@ $(call inherit-product-if-exists, vendor/motorola/condor/condor-vendor.mk)
 PRODUCT_COPY_FILES += \
      $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/system,system)
 
-# libcondor
-PRODUCT_PACKAGES += \
-    libcondor
-
 # Stlport
 PRODUCT_PACKAGES += \
     libstlport
