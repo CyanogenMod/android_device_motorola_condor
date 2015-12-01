@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 # Camera
-LOCAL_SRC_FILES := moto_camera.c
+LOCAL_SRC_FILES := gui/SensorManager.cpp
 LOCAL_SHARED_LIBRARIES := libutils libgui liblog libbinder
 LOCAL_MODULE := libcondor
 LOCAL_MODULE_TAGS := optional
