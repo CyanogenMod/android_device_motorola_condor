@@ -31,14 +31,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 PRODUCT_COPY_FILES += \
      $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/system,system)
 
-# Prebuilt input device calibration files
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/sec_config:system/etc/sec_config \
-    $(LOCAL_PATH)/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf
-
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
