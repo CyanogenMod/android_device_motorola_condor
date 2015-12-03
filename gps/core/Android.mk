@@ -9,12 +9,6 @@ LOCAL_MODULE_OWNER := qcom
 
 LOCAL_MODULE_TAGS := optional
 
-ifeq ($(TARGET_DEVICE),apq8026_lw)
-LOCAL_CFLAGS += -DPDK_FEATURE_SET
-else ifeq ($(BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET),true)
-LOCAL_CFLAGS += -DPDK_FEATURE_SET
-endif
-
 LOCAL_SHARED_LIBRARIES := \
     libutils \
     libcutils \
@@ -22,6 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
     libdl
 
 LOCAL_SRC_FILES += \
+    MsgTask.cpp \
     LocApiBase.cpp \
     LocAdapterBase.cpp \
     ContextBase.cpp \
@@ -37,6 +32,7 @@ LOCAL_C_INCLUDES:= \
 
 LOCAL_COPY_HEADERS_TO:= libloc_core/
 LOCAL_COPY_HEADERS:= \
+    MsgTask.h \
     LocApiBase.h \
     LocAdapterBase.h \
     ContextBase.h \
@@ -45,8 +41,7 @@ LOCAL_COPY_HEADERS:= \
     UlpProxyBase.h \
     gps_extended_c.h \
     gps_extended.h \
-    loc_core_log.h \
-    LocAdapterProxyBase.h
+    loc_core_log.h
 
 LOCAL_PRELINK_MODULE := false
 

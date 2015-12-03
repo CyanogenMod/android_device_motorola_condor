@@ -40,7 +40,8 @@ LOCAL_CFLAGS += \
 
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
-    $(TARGET_OUT_HEADERS)/libloc_core
+    $(TARGET_OUT_HEADERS)/libloc_core \
+    $(LOCAL_DIR)
 
 LOCAL_COPY_HEADERS_TO:= libloc_eng/
 LOCAL_COPY_HEADERS:= \
