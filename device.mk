@@ -21,6 +21,9 @@
 
 LOCAL_PATH := device/motorola/condor
 
+# device specific vendor blobs
+$(call inherit-product-if-exists, vendor/motorola/condor/condor-vendor.mk)
+
 # Ramdisk
  PRODUCT_COPY_FILES += \
      $(call find-copy-subdir-files,*,${LOCAL_PATH}/ramdisk,root)

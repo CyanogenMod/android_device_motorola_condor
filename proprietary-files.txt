@@ -29,9 +29,6 @@ etc/gps.conf
 etc/izat.conf
 etc/lowi.conf
 etc/msap.conf
-etc/permissions/com.qualcomm.location.xml
-etc/permissions/qcnvitems.xml
-etc/permissions/qcrilhook.xml
 etc/quipc.conf
 etc/sap.conf
 etc/xtra_root_cert.pem
