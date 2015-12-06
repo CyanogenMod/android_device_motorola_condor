@@ -1,0 +1,8 @@
+on early-init
+    # Create PDS mount point
+    mkdir /pds 0755 root root
+
+on fs
+    # Mount PDS
+    wait /dev/block/platform/msm_sdcc.1/by-name/pds
+    exec /system/bin/sh /system/etc/mount_pds.sh
