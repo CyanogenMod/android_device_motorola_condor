@@ -1,3 +1,0 @@
-allow system_server display_sysfs:file { getattr open read write };
-allow system_server vibeamp_sysfs:file { getattr open read write };
-allow system_server time_daemon:unix_stream_socket connectto;

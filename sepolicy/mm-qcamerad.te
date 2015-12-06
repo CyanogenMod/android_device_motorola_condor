@@ -1,7 +1,0 @@
-allow mm-qcamerad system_server:unix_stream_socket { read write };
-allow servicemanager mm-qcamerad:dir search;
-allow servicemanager mm-qcamerad:file { open read };
-allow servicemanager mm-qcamerad:process { getattr };
-binder_call(mm-qcamerad, servicemanager)
-binder_call(mm-qcamerad, system_server)
-unix_socket_connect(mm-qcamerad, mpctl, mpdecision)
