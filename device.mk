@@ -33,39 +33,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libstlport
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.hwc.mdpcomp.enable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opendelta.device=condor \
-    persist.sys.logkit.ctrlcode=0 \
-    ro.vendor.extension_library=/vendor/lib/libqc-opt.so \
-    ro.usb.mtp=0x2e82 \
-    ro.usb.mtp_adb=0x2e76 \
-    ro.usb.ptp=0x2e83 \
-    ro.usb.ptp_adb=0x2e84 \
-    ro.usb.bpt=0x2e28 \
-    ro.usb.bpt_adb=0x2e29 \
-    ro.usb.bpteth=0x2e2a \
-    ro.usb.bpteth_adb=0x2e2b \
-    persist.audio.calfile0=/etc/acdbdata/Bluetooth_cal.acdb \
-    persist.audio.calfile1=/etc/acdbdata/General_cal.acdb \
-    persist.audio.calfile2=/etc/acdbdata/Global_cal.acdb \
-    persist.audio.calfile3=/etc/acdbdata/Handset_cal.acdb \
-    persist.audio.calfile4=/etc/acdbdata/Hdmi_cal.acdb \
-    persist.audio.calfile5=/etc/acdbdata/Headset_cal.acdb \
-    persist.audio.calfile6=/etc/acdbdata/Speaker_cal.acdb \
-    persist.sys.qc.sub.rdump.max=3 \
-    mdc_initial_max_retry=10 \
-    drm.service.enabled=true \
-    ro.media.enc.aud.fileformat=amr \
-    ro.media.enc.aud.codec=amrnb \
-    ro.qc.sdk.izat.premium_enabled=1 \
-    ro.qc.sdk.izat.service_mask=0x5 \
-    persist.gps.qc_nlp_in_use=1 \
-    persist.loc.nlp_name=com.qualcomm.services.location \
-    ro.gps.agps_provider=1
-
 # Prima(pronto firmware)
 PRODUCT_COPY_FILES += \
     kernel/motorola/msm8610/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
