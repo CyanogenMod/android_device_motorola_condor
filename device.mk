@@ -29,21 +29,9 @@ LOCAL_PATH := device/motorola/condor
 PRODUCT_COPY_FILES += \
      $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/system,system)
 
-# Camera
-PRODUCT_PACKAGES += \
-    libboringssl-compat \
-    libshim_qcopt
-
-# Motorola
-PRODUCT_PACKAGES += \
-    libmoto
-
 # Stlport
 PRODUCT_PACKAGES += \
     libstlport
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true
