@@ -23,8 +23,6 @@ LOCAL_PATH := device/motorola/condor
 TARGET_KERNEL_CONFIG := cm_condor_defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8610
 
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-
 # Storage & partiiton
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10444800
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10526720
