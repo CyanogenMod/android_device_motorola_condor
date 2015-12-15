@@ -72,6 +72,12 @@ persist.data.qmi.adb_logmask=0
 persist.timed.enable=true
 
 #
+# system prop for opengles version
+#
+# 196608 is decimal for 0x30000 to report version 3
+ro.opengles.version=196608
+
+#
 # System props for telephony
 # System prop to turn on CdmaLTEPhone always
 telephony.lteOnCdmaDevice=0
