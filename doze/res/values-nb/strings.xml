@@ -13,13 +13,11 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="screen_gestures_panel_title">Gestos</string>
-  <string name="screen_gestures_panel_summary">Utilizar gestos para realizar acciones</string>
-  <string name="ambient_display_title">Pantalla ambiente</string>
-  <string name="ambient_display_enable_title">Pantalla ambiente</string>
-  <string name="ambient_display_enable_summary">Activa la pantalla cuando recibes notificaciones</string>
-  <string name="hand_wave_gesture_title">Pasar la mano</string>
-  <string name="hand_wave_gesture_summary">Mostrar notificaciones cuando se pase la mano por el dispositivo</string>
-  <string name="pocket_gesture_title">Bolsillo</string>
-  <string name="pocket_gesture_summary">Mostrar notificaciones cuando se saque del bolsillo</string>
+  <string name="screen_gestures_panel_title">Bevegelser</string>
+  <string name="screen_gestures_panel_summary">Bruk bevegelser til å utføre handlinger</string>
+  <string name="ambient_display_title">Omgivelsesskjerm</string>
+  <string name="ambient_display_enable_title">Omgivelsesskjerm</string>
+  <string name="ambient_display_enable_summary">Skru på skjermen når du mottar varsler</string>
+  <string name="hand_wave_gesture_title">Håndvink</string>
+  <string name="pocket_gesture_title">Lomme</string>
 </resources>
