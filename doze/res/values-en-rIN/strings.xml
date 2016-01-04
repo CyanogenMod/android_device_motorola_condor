@@ -13,13 +13,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="screen_gestures_panel_title">Hareketler</string>
-  <string name="screen_gestures_panel_summary">Eylemleri gerçekleştirmek için hareketleri kullanın</string>
-  <string name="ambient_display_title">Bildirim ekranı</string>
-  <string name="ambient_display_enable_title">Bildirim ekranı</string>
-  <string name="ambient_display_enable_summary">Bildirim aldığınızda ekranı uyandırın</string>
-  <string name="hand_wave_gesture_title">El sallama</string>
-  <string name="hand_wave_gesture_summary">El sallayınca bildirimleri at</string>
-  <string name="pocket_gesture_title">Cep</string>
-  <string name="pocket_gesture_summary">Cepten çıkarınca bildirimleri at</string>
+  <string name="screen_gestures_panel_title">Gestures</string>
+  <string name="screen_gestures_panel_summary">Use gestures to perform actions</string>
+  <string name="ambient_display_title">Ambient display</string>
+  <string name="ambient_display_enable_title">Ambient display</string>
+  <string name="ambient_display_enable_summary">Wake screen when you receive notifications</string>
+  <string name="hand_wave_gesture_title">Hand wave</string>
+  <string name="hand_wave_gesture_summary">Pulse notifications on hand wave</string>
+  <string name="pocket_gesture_title">Pocket</string>
+  <string name="pocket_gesture_summary">Pulse notifications on removal from pocket</string>
 </resources>
