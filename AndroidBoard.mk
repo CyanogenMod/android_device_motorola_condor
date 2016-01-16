@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Prashant Gahlot (proxthehacker@gmail.com)
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,17 +14,9 @@
 # limitations under the License.
 #
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
+LOCAL_PATH := $(call my-dir)
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-# Inherit from condor device
-$(call inherit-product, device/motorola/condor/device.mk)
-
-PRODUCT_NAME := full_condor
-PRODUCT_DEVICE := condor
-PRODUCT_BRAND := motorola
-PRODUCT_MODEL := condor
-PRODUCT_MANUFACTURER := motorola
+#----------------------------------------------------------------------
+# extra images
+#----------------------------------------------------------------------
+include build/core/generate_extra_images.mk

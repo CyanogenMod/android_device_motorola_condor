@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Prashant Gahlot (proxthehacker@gmail.com)
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,4 +41,4 @@ TARGET_OTA_ASSERT_DEVICE := xt1021,xt1022,xt1023,condor_umts,condor_umtsds,condo
 TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_condor.cpp
 
 BOARD_SEPOLICY_DIRS += \
-    device/motorola/condor/sepolicy
+    $(LOCAL_PATH)/sepolicy
