@@ -13,13 +13,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="screen_gestures_panel_title">Pokreti</string>
-  <string name="screen_gestures_panel_summary">Koristite se pokretima za obavljanje radnji.</string>
-  <string name="ambient_display_title">Ambijentni prikaz</string>
-  <string name="ambient_display_enable_title">Ambijentni prikaz</string>
-  <string name="ambient_display_enable_summary">Buđenje zaslona kada primite obavijest</string>
+  <string name="screen_gestures_panel_title">Geste</string>
+  <string name="screen_gestures_panel_summary">Koristite geste za aktivnosti</string>
+  <string name="ambient_display_title">Ambijentni zaslon</string>
+  <string name="ambient_display_enable_title">Ambijentni zaslon</string>
+  <string name="ambient_display_enable_summary">Probudi zaslon kada primite obavijest</string>
   <string name="hand_wave_gesture_title">Zamah rukom</string>
-  <string name="hand_wave_gesture_summary">Prikaz obavijesti na zamah rukom</string>
+  <string name="hand_wave_gesture_summary">Prikaži obavijesti na zamah rukom</string>
   <string name="pocket_gesture_title">Džep</string>
-  <string name="pocket_gesture_summary">Prikaz obavijesti kada izvadite uređaj iz džepa</string>
+  <string name="pocket_gesture_summary">Prikaži obavijesti kada izvadite uređaj iz džepa</string>
 </resources>
