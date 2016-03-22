@@ -2,10 +2,6 @@ on early-init
     # Create PDS mount point
     mkdir /pds 0755 root root
 
-on init
-# Symbols required for Motorola blobs
-    export LD_PRELOAD  "/system/lib/libcondor.so"
-
 on fs
     # Mount PDS
     wait /dev/block/platform/msm_sdcc.1/by-name/pds
