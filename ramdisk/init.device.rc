@@ -3,8 +3,8 @@ on early-init
     mkdir /pds 0755 root root
 
 on init
-# Symbols required for Motorola blobs
-    export LD_PRELOAD  "/system/lib/libcondor.so"
+    # Symbols required for Motorola blobs
+    export LD_SHIM_LIBS "/system/lib/liblog.so|libmoto.so /system/lib/libcrypto.so|libboringssl-compat.so /system/vendor/lib/libqc-opt.so|libshim_qcopt.so /system/lib/libmot_sensorlistener.so|libcondor.so"
 
 on fs
     # Mount PDS
