@@ -8,7 +8,6 @@ etc/acdbdata/Handset_cal.acdb
 etc/acdbdata/Hdmi_cal.acdb
 etc/acdbdata/Headset_cal.acdb
 etc/acdbdata/Speaker_cal.acdb
-etc/cacert_location.pem
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
 etc/firmware/a225p5_pm4.fw
@@ -27,13 +26,8 @@ etc/firmware/wlan/prima/WCNSS_cfg.dat
 etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
 etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 etc/gps.conf
-etc/izat.conf
-etc/lowi.conf
 etc/msap.conf
-etc/quipc.conf
 etc/sap.conf
-etc/xtra_root_cert.pem
-etc/xtwifi.conf
 lib/hw/camera.msm8610.so
 lib/hw/sensors.msm8610.so
 lib/libchromatix_ar0543_common.so
