@@ -32,10 +32,6 @@ $(call inherit-product-if-exists, vendor/motorola/condor/condor-vendor.mk)
 PRODUCT_COPY_FILES += \
      $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/system,system)
 
-# Stlport
-PRODUCT_PACKAGES += \
-    libstlport
-
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
 
