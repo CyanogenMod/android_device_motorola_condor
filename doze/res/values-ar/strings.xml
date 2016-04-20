@@ -13,13 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">الإيماءات</string>
   <string name="screen_gestures_panel_summary">استخدم الإيماءات لتنفيذ الإجراءات</string>
-  <string name="ambient_display_title">العرض المحيط</string>
-  <string name="ambient_display_enable_title">العرض المحيط</string>
-  <string name="ambient_display_enable_summary">تنبيه الشاشة عند استلام إشعارات</string>
+  <string name="ambient_display_title">العرض المحيطي</string>
+  <string name="ambient_display_enable_title">العرض المحيطي</string>
+  <string name="ambient_display_enable_summary">نشّط الشاشة عند تلقي إخطارات</string>
   <string name="hand_wave_gesture_title">التلويح باليد</string>
-  <string name="hand_wave_gesture_summary">دفع الإشعارات عند التلويح باليد</string>
+  <string name="hand_wave_gesture_summary">إخطارات انبثاقية عند التلويح باليد</string>
   <string name="pocket_gesture_title">الجيب</string>
-  <string name="pocket_gesture_summary">إشعارات متذبذبة عند الإخراج من الجيب</string>
+  <string name="pocket_gesture_summary">إخطارات انبثاقية عند الإخراج من الجيب</string>
 </resources>
