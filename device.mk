@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Prashant Gahlot (proxthehacker@gmail.com)
+# Copyright (C) 2014-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,3 +37,7 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 # Inherit from msm8610-common
 $(call inherit-product, device/motorola/msm8610-common/msm8610.mk)
+
+# Doze
+PRODUCT_PACKAGES += \
+    MotoDoze
