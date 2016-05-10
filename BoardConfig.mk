@@ -1,3 +1,19 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @shubhmg
+ Watch 20
+  Star 25
+ Fork 68 CyanogenMod/android_device_motorola_condor
+ Code  Issues 3  Pull requests 0  Wiki  Pulse  Graphs
+Branch: cm-13.0 Find file Copy pathandroid_device_motorola_condor/BoardConfig.mk
+fbf130a  on Dec 15, 2015
+@ashwinr64 ashwinr64 Condor: Enforce SELinux
+15 contributors @percy-g2 @ashwinr64 @JackpotClavin @scritch007 @sultanqasim @cyanogen @luca020400 @khusika @KonstaT @intervigilium @myfluxi @mdmower @dcalandria @luk1337 @Alberto97
+RawBlameHistory    45 lines (36 sloc)  1.43 KB
 #
 # Copyright (C) 2014 Prashant Gahlot (proxthehacker@gmail.com)
 #
@@ -38,7 +54,7 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.qcom
 TARGET_OTA_ASSERT_DEVICE := xt1021,xt1022,xt1023,condor_umts,condor_umtsds,condor
 
 # Init
-TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_condor.cpp
+TARGET_INIT_VENDOR_LIB := libinit_condor
 
 BOARD_SEPOLICY_DIRS += \
     device/motorola/condor/sepolicy
