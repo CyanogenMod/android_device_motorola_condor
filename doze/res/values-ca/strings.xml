@@ -13,12 +13,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Gestos</string>
   <string name="ambient_display_title">Pantalla ambient</string>
   <string name="ambient_display_enable_title">Pantalla ambient</string>
   <string name="ambient_display_enable_summary">Encen la pantalla quan rebis notificacions</string>
-  <string name="hand_wave_gesture_title">Agita amb la ma</string>
-  <string name="hand_wave_gesture_summary">Mostra notificacions quan s\'agiti amb la ma</string>
+  <string name="hand_wave_gesture_title">Passa la mà</string>
+  <string name="hand_wave_gesture_summary">Mostra notificacions quan es passi la mà</string>
   <string name="pocket_gesture_title">Butxaca</string>
   <string name="pocket_gesture_summary">Mostra notificacions quan te\'l treguis de la butxaca</string>
 </resources>

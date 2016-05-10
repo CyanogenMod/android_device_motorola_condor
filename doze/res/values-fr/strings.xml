@@ -13,12 +13,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Gestes</string>
-  <string name="ambient_display_title">Affichage ambiant</string>
-  <string name="ambient_display_enable_title">Affichage ambiant</string>
+  <string name="ambient_display_title">Affichage en mode veille</string>
+  <string name="ambient_display_enable_title">Affichage en mode veille</string>
   <string name="ambient_display_enable_summary">Allume l\'écran lorsque vous recevez des notifications</string>
   <string name="hand_wave_gesture_title">Passage de la main</string>
-  <string name="hand_wave_gesture_summary">Active les notifications en passant la main</string>
+  <string name="hand_wave_gesture_summary">Le voyant des notifications clignote en passage de main</string>
   <string name="pocket_gesture_title">Poche</string>
-  <string name="pocket_gesture_summary">Active les notifications en sortie de poche</string>
+  <string name="pocket_gesture_summary">Le voyant des notifications clignote en sortie de poche</string>
 </resources>
