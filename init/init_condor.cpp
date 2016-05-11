@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2014, The Linux Foundation. All rights reserved.
+   Copyright (c) 2016, The CyanogenMod Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -35,25 +35,20 @@
 #include "log.h"
 #include "util.h"
 
-#include "init_msm.h"
+#define ISMATCH(a,b)    (!strncmp(a,b,PROP_VALUE_MAX))
 
-void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *board_type)
+void vendor_load_properties()
 {
     char platform[PROP_VALUE_MAX];
     char radio[PROP_VALUE_MAX];
     char device[PROP_VALUE_MAX];
-    char devicename[PROP_VALUE_MAX];
     int rc;
-
-    UNUSED(msm_id);
-    UNUSED(msm_ver);
-    UNUSED(board_type);
 
     rc = property_get("ro.board.platform", platform);
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
-	property_set("ro.product.model", "Moto E");
+    property_set("ro.product.model", "Moto E");
     property_get("ro.boot.radio", radio);
     if (ISMATCH(radio, "0x1")) {
         /* xt1021 */
@@ -87,6 +82,5 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("persist.radio.multisim.config", "");
     }
     property_get("ro.product.device", device);
-    strlcpy(devicename, device, sizeof(devicename));
-    ERROR("Found radio id: %s setting build properties for %s device\n", radio, devicename);
+    INFO("Found radio id: %s setting build properties for %s device\n", radio, device);
 }
