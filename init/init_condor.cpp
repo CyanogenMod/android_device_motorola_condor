@@ -67,7 +67,7 @@ void vendor_load_properties()
         property_set("ro.build.fingerprint", "motorola/condor_retaildsds/condor_umtsds:5.1/LPC23.13-34.8/12:user/release-keys");
         property_set("ro.mot.build.customerid", "retaildsdsall");
         property_set("ro.telephony.default_network", "0,1");
-        property_set("ro.telephony.ril.config", "simactivation");
+        property_set("ro.telephony.ril.config", "simactivation,sim2gsmonly");
         property_set("persist.radio.multisim.config", "dsds");
         property_set("persist.radio.dont_use_dsd", "true");
         property_set("persist.radio.plmn_name_cmp", "1");
