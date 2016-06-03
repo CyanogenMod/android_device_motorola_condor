@@ -375,6 +375,7 @@
 	<path name="adc1">
 		<ctl name="MI2S_TX Channels" value="One" />
 		<ctl name="DEC1 MUX" value="ADC1" />
+		<ctl name="DEC1 Volume" value="91" />
 	</path>
 
 	<path name="adc2">
