@@ -21,5 +21,5 @@
   <string name="hand_wave_gesture_title">Mahanje z roko</string>
   <string name="hand_wave_gesture_summary">Utripaj obvestila ob mahanju z roko</string>
   <string name="pocket_gesture_title">Žep</string>
-  <string name="pocket_gesture_summary">Utripaj obvestila ob izvlečenju iz žepa</string>
+  <string name="pocket_gesture_summary">Utripaj obvestila ob odstranitvi iz žepa</string>
 </resources>
