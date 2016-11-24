@@ -2,5 +2,9 @@
   {
     "repository":  "android_device_motorola_msm8610-common",
     "target_path": "device/motorola/msm8610-common"
+  },
+  {
+    "repository": "android_packages_resources_devicesettings",
+    "target_path": "packages/resources/devicesettings"
   }
 ]
