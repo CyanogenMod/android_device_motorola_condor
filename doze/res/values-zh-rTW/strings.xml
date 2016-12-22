@@ -14,4 +14,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Gesture shortcuts -->
+  <string name="screen_gestures_panel_title">手勢</string>
+  <string name="ambient_display_title">環境顯示</string>
+  <string name="ambient_display_enable_title">環境顯示</string>
+  <string name="ambient_display_enable_summary">當收到通知時喚醒螢幕</string>
+  <string name="hand_wave_gesture_title">揮手</string>
+  <string name="hand_wave_gesture_summary">當揮手時發出震動通知</string>
+  <string name="pocket_gesture_title">口袋</string>
+  <string name="pocket_gesture_summary">從口袋中取出時發出震動通知</string>
 </resources>
